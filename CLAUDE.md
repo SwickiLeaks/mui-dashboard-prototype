@@ -35,8 +35,20 @@ Each panel receives only the callbacks it needs. The cross-panel data flow worth
 - **LibraryPanel** (`onOpenPlans`) — marks selected plans as `isOpen: true` in `App`, then switches `selectedPanel` to `"map"` so the user immediately sees them in the Open Plans list.
 - **MapPanel** (`onSelectPlan`, `onClosePlan`) — `onSelectPlan` sets `selectedPlan` and dismisses the panel; `onClosePlan` flips a plan's `isOpen` to `false` and clears `selectedPlan` if it was the one closed.
 
-If you add a new panel, you must touch four places: add the key to `PanelKey` in [src/types.ts](src/types.ts), add a hotkey + control entry in [src/App.tsx](src/App.tsx) and [src/components/AppHeader.tsx](src/components/AppHeader.tsx), and add the render branch in [src/components/WizardPanel.tsx](src/components/WizardPanel.tsx).
+If you add a new panel, you must touch four places: add the key to `PanelKey` in [src/types.ts](src/types.ts), add a hotkey + control entry in [src/App.tsx](src/App.tsx) and [src/components/AppHeader/data.tsx](src/components/AppHeader/data.tsx), and add the render branch in [src/components/WizardPanel.tsx](src/components/WizardPanel.tsx).
 
-### Styling
+### Folder layout for the transplantable components
 
-All styling is inline via MUI's `sx` prop against the custom dark theme in [src/theme.ts](src/theme.ts) (primary `#90caf9`, paper `#1a1a1a`, default bg `#0f0f0f`). There are no CSS modules, no styled-components, no Tailwind. Panels use a consistent visual vocabulary — `#393939` panel surface, `#303030` cards, `#555` borders, `primary.main` for selected state — copy from a sibling panel when adding new UI rather than inventing new colors.
+Large components live in their own folder with the shape `index.tsx` + `components/` + `styles.ts` + `utils.ts` + (sometimes) `types.ts` / `data.tsx`. The folder is the unit of transplant — drop it into another app and wire the props. This applies to [src/components/AppHeader/](src/components/AppHeader/), [src/components/PlanDetailDrawer/](src/components/PlanDetailDrawer/), [src/panels/OpenPlansPanel/](src/panels/OpenPlansPanel/), and [src/panels/LibraryPanel/](src/panels/LibraryPanel/). Smaller panels (Create/Tools/Review) and helpers (WizardPanel, PanelHeader, PanelActions) remain single files.
+
+### Theme
+
+The "tactical" dark theme is centralized in [src/theme/](src/theme/):
+- [tokens.ts](src/theme/tokens.ts) — color / font / scrollbar / selection style tokens (`tacticalSurface`, `monoFont`, `selectionStyles`, `scrollbarTacticalSx`, etc.)
+- [muiTheme.ts](src/theme/muiTheme.ts) — the MUI `darkTheme` (primary `#90caf9`, paper `#1a1a1a`, default bg `#0f0f0f`)
+- [components.tsx](src/theme/components.tsx) — shared theme-aware UI: `ClassificationBanner`, `TacticalSection`, `DataRow`
+- [index.ts](src/theme/index.ts) — single import entry: `import { ... } from "../theme"`
+
+All styling is inline via MUI's `sx` prop against these tokens — no CSS modules, no styled-components, no Tailwind. When transplanting components, drop in `src/theme/` and `src/utils/` first, then `ThemeProvider({ theme: darkTheme })` at the app root.
+
+Shared formatting helpers (`formatMilitary`, `formatMilitaryShort`, `pad2`) live in [src/utils/formatting.ts](src/utils/formatting.ts).

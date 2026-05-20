@@ -1,6 +1,6 @@
 import { Box, Button, Stack } from "@mui/material";
 
-import { monoFont, tacticalSurface } from "../tactical";
+import { monoFont, tacticalSurface } from "../theme";
 
 type PanelActionsProps = {
   continueLabel?: string;

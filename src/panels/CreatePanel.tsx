@@ -2,7 +2,7 @@ import { Box, Stack, TextField } from "@mui/material";
 
 import PanelHeader from "../components/PanelHeader";
 import PanelActions from "../components/PanelActions";
-import { monoFont, scrollbarTacticalSx, tacticalSurface } from "../tactical";
+import { monoFont, scrollbarTacticalSx, tacticalSurface } from "../theme";
 
 type CreatePanelProps = {
   onClose: () => void;

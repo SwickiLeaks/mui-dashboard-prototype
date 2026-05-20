@@ -1,6 +1,6 @@
 import { Box, Stack, Typography } from "@mui/material";
 
-import { ClassificationBanner, monoFont, tacticalSurface } from "../tactical";
+import { ClassificationBanner, monoFont, tacticalSurface } from "../theme";
 
 type PanelHeaderProps = {
   title: string;

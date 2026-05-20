@@ -1,7 +1,7 @@
 import { Box } from "@mui/material";
 import type { PanelKey, WeaponPlan } from "../types";
 
-import { tacticalSurface } from "../tactical";
+import { tacticalSurface } from "../theme";
 
 import OpenPlansPanel from "../panels/OpenPlansPanel";
 import CreatePanel from "../panels/CreatePanel";

@@ -8,7 +8,7 @@ import {
   TacticalSection,
   monoFont,
   scrollbarTacticalSx,
-} from "../tactical";
+} from "../theme";
 
 type ReviewPanelProps = {
   onClose: () => void;

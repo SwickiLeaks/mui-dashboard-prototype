@@ -19,7 +19,7 @@ import {
   monoFont,
   scrollbarTacticalSx,
   tacticalSurface,
-} from "../tactical";
+} from "../theme";
 
 type ToolsPanelProps = {
   onClose: () => void;

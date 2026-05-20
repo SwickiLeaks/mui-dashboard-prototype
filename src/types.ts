@@ -4,23 +4,29 @@ export type PlanCategory = "weapon" | "network" | "comm" | "e2";
 
 export type LibraryBucket = "standards" | "myItems" | "favorites" | "aircrew";
 
-export type TargetPriority = "low" | "med" | "high";
-export type ReleaseStatus = "draft" | "approved" | "active";
+export type Weapon = {
+  id: string;
+  name: string;
+  description: string;
+};
 
 export type Target = {
   id: string;
   name: string;
-  coordinates: string;
-  priority: TargetPriority;
-  notes: string;
+  weaponIds: string[];
+  latitude?: number;
+  longitude?: number;
 };
 
 export type Release = {
   id: string;
   name: string;
-  description: string;
-  status: ReleaseStatus;
-  targets: Target[];
+  targetIds: string[];
+  latitude?: number;
+  longitude?: number;
+  selected?: boolean;
+  hovered?: boolean;
+  modified?: boolean;
 };
 
 export type WeaponPlan = {
@@ -37,4 +43,6 @@ export type WeaponPlan = {
   isFavorite: boolean;
   associatedPlanIds: string[];
   releases: Release[];
+  targets: Target[];
+  weapons: Weapon[];
 };
