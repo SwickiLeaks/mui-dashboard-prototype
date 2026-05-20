@@ -1,8 +1,8 @@
 import { Box } from "@mui/material";
-import type { ExcavationPlan } from "../types";
+import type { WeaponPlan } from "../types";
 
 type DashboardContentProps = {
-  selectedPlan: ExcavationPlan | null;
+  selectedPlan: WeaponPlan | null;
 };
 
 export default function DashboardContent({ selectedPlan }: DashboardContentProps) {

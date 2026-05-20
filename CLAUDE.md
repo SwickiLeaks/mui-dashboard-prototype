@@ -19,7 +19,7 @@ This is a Vite + React 18 + TypeScript + MUI v6 dark-themed dashboard prototype.
 
 `App` owns four pieces of state that flow down as props:
 
-- `plans` — list of `ExcavationPlan` records (seeded from [src/data/excavationPlans.ts](src/data/excavationPlans.ts)); each has an `isOpen` flag toggled by the panels.
+- `plans` — list of `WeaponPlan` records (seeded from [src/data/weaponPlans.ts](src/data/weaponPlans.ts)); each has an `isOpen` flag toggled by the panels.
 - `expandedControls` — whether the header's panel-launcher buttons are visible (toggled by the folder icon).
 - `selectedPanel` — which wizard panel (if any) is currently slid in; one of `"map" | "create" | "library" | "tools" | "review"`, or `null`.
 - `selectedPlan` — the currently-active plan whose name shows in the header.

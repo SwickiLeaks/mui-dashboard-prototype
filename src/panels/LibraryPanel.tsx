@@ -12,7 +12,7 @@ import {
 import AccountTreeIcon from "@mui/icons-material/AccountTree";
 import BoltIcon from "@mui/icons-material/Bolt";
 import ChevronRightIcon from "@mui/icons-material/ChevronRight";
-import ConstructionIcon from "@mui/icons-material/Construction";
+import TrackChangesIcon from "@mui/icons-material/TrackChanges";
 import FilterListIcon from "@mui/icons-material/FilterList";
 import GroupsIcon from "@mui/icons-material/Groups";
 import NavigateNextIcon from "@mui/icons-material/NavigateNext";
@@ -28,7 +28,7 @@ import {
   scrollbarTacticalSx,
   tacticalSurface,
 } from "../tactical";
-import type { ExcavationPlan, LibraryBucket, PlanCategory } from "../types";
+import type { LibraryBucket, PlanCategory, WeaponPlan } from "../types";
 
 type PlanFilter = "all" | "open" | "closed";
 
@@ -90,35 +90,35 @@ const buckets: BucketMeta[] = [
 
 const categories: CategoryMeta[] = [
   {
-    key: "excavation",
-    label: "Excavation Plans",
-    description: "Trench, footing, and ground-disturbance plans.",
-    icon: <ConstructionIcon />,
+    key: "weapon",
+    label: "Weapon Plans Library",
+    description: "LRASM and GBU-X strike packages and engagement profiles.",
+    icon: <TrackChangesIcon />,
   },
   {
     key: "network",
-    label: "Network Plans",
-    description: "Network routing and topology layouts.",
+    label: "Network Plans Library",
+    description: "Tactical data link routing and topology layouts.",
     icon: <AccountTreeIcon />,
   },
   {
     key: "comm",
-    label: "Comm Plans",
-    description: "Radio and communications coordination.",
+    label: "Comms Plan Library",
+    description: "Radio assignments and weapon comms coordination.",
     icon: <RouterIcon />,
   },
   {
-    key: "emergency",
-    label: "Emergency Plans",
-    description: "Response and contingency plans.",
+    key: "e2",
+    label: "E2 Link 16 Event Library",
+    description: "E-2 Hawkeye Link 16 events and track-sharing plans.",
     icon: <BoltIcon />,
   },
 ];
 
 const scopeForPath = (
-  plans: ExcavationPlan[],
+  plans: WeaponPlan[],
   path: LibraryPath
-): ExcavationPlan[] => {
+): WeaponPlan[] => {
   return plans.filter((plan) => {
     if (path.bucket === "standards") return plan.isStandard;
     if (path.bucket === "myItems") return plan.isMine;
@@ -146,7 +146,7 @@ const initials = (name: string) =>
     .toUpperCase();
 
 type LibraryPanelProps = {
-  plans: ExcavationPlan[];
+  plans: WeaponPlan[];
   onOpenPlans: (planIds: string[]) => void;
   onClose: () => void;
 };
@@ -193,10 +193,10 @@ export default function LibraryPanel({
   const categoryCounts = useMemo(() => {
     const scope = scopeForPath(plans, path);
     return {
-      excavation: scope.filter((p) => p.category === "excavation").length,
+      weapon: scope.filter((p) => p.category === "weapon").length,
       network: scope.filter((p) => p.category === "network").length,
       comm: scope.filter((p) => p.category === "comm").length,
-      emergency: scope.filter((p) => p.category === "emergency").length,
+      e2: scope.filter((p) => p.category === "e2").length,
     } satisfies Record<PlanCategory, number>;
   }, [plans, path]);
 
@@ -837,7 +837,7 @@ function ItemList({
   accent,
   onToggle,
 }: {
-  plans: ExcavationPlan[];
+  plans: WeaponPlan[];
   filter: PlanFilter;
   pendingPlanIds: string[];
   accent: string;

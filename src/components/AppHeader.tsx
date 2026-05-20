@@ -22,7 +22,7 @@ import AutoAwesomeIcon from "@mui/icons-material/AutoAwesome";
 
 import { selectionStyles } from "../theme";
 import { monoFont } from "../tactical";
-import type { ExcavationPlan, PanelKey } from "../types";
+import type { PanelKey, WeaponPlan } from "../types";
 
 const controls: Array<{
   key: PanelKey;
@@ -39,7 +39,7 @@ const controls: Array<{
 type AppHeaderProps = {
   expandedControls: boolean;
   selectedPanel: PanelKey | null;
-  selectedPlan: ExcavationPlan | null;
+  selectedPlan: WeaponPlan | null;
   onExpandedControlsChange: React.Dispatch<React.SetStateAction<boolean>>;
   onSelectedPanelChange: React.Dispatch<React.SetStateAction<PanelKey | null>>;
 };

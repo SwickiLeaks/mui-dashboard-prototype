@@ -13,12 +13,12 @@ import {
   scrollbarTacticalSx,
   tacticalSurface,
 } from "../tactical";
-import type { ExcavationPlan } from "../types";
+import type { WeaponPlan } from "../types";
 
 type OpenPlansPanelProps = {
-  plans: ExcavationPlan[];
-  selectedPlan: ExcavationPlan | null;
-  onSelectPlan: (plan: ExcavationPlan) => void;
+  plans: WeaponPlan[];
+  selectedPlan: WeaponPlan | null;
+  onSelectPlan: (plan: WeaponPlan) => void;
   onClosePlan: (planId: string) => void;
   onCloseAllPlans: () => void;
   onOpenLibrary: () => void;
@@ -158,7 +158,7 @@ export default function OpenPlansPanel({
               const isSelected = selectedPlan?.id === plan.id;
               const linkedPlans = plan.associatedPlanIds
                 .map((id) => planById.get(id))
-                .filter((p): p is ExcavationPlan => Boolean(p));
+                .filter((p): p is WeaponPlan => Boolean(p));
 
               return (
                 <PlanCard
@@ -189,9 +189,9 @@ function PlanCard({
   onOpenAssociation,
   onDisassociate,
 }: {
-  plan: ExcavationPlan;
+  plan: WeaponPlan;
   selected: boolean;
-  linkedPlans: ExcavationPlan[];
+  linkedPlans: WeaponPlan[];
   onSelect: () => void;
   onClose: () => void;
   onOpenAssociation: (id: string) => void;

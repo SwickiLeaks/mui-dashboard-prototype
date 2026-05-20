@@ -1,6 +1,6 @@
 export type PanelKey = "map" | "create" | "library" | "tools" | "review";
 
-export type PlanCategory = "excavation" | "network" | "comm" | "emergency";
+export type PlanCategory = "weapon" | "network" | "comm" | "e2";
 
 export type LibraryBucket = "standards" | "myItems" | "favorites" | "aircrew";
 
@@ -23,7 +23,7 @@ export type Release = {
   targets: Target[];
 };
 
-export type ExcavationPlan = {
+export type WeaponPlan = {
   id: string;
   name: string;
   description: string;

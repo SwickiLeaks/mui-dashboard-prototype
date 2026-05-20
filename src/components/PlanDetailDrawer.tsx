@@ -20,7 +20,7 @@ import {
   tacticalSurface,
 } from "../tactical";
 import type {
-  ExcavationPlan,
+  WeaponPlan,
   PlanCategory,
   Release,
   ReleaseStatus,
@@ -29,28 +29,21 @@ import type {
 } from "../types";
 
 type PlanDetailDrawerProps = {
-  plan: ExcavationPlan;
-  plans: ExcavationPlan[];
+  plan: WeaponPlan;
+  plans: WeaponPlan[];
   onClose: () => void;
-  onUpdatePlan: (plan: ExcavationPlan) => void;
+  onUpdatePlan: (plan: WeaponPlan) => void;
 };
 
 type Selection =
   | { kind: "release"; releaseId: string }
   | { kind: "target"; releaseId: string; targetId: string };
 
-const categoryLabel: Record<PlanCategory, string> = {
-  excavation: "EXCAVATION",
-  network: "NETWORK",
-  comm: "COMM",
-  emergency: "EMERGENCY",
-};
-
 const categoryColor: Record<PlanCategory, string> = {
-  excavation: "#ce93d8",
+  weapon: "#ce93d8",
   network: "#a5d6a7",
   comm: "#ffcc80",
-  emergency: "#ef9a9a",
+  e2: "#ef9a9a",
 };
 
 const releaseStatusOptions: Array<{ value: ReleaseStatus; label: string }> = [
@@ -158,7 +151,7 @@ export default function PlanDetailDrawer({
     >
       <ClassificationBanner
         accent={accent}
-        label={categoryLabel[plan.category]}
+        label="WEAPON PLAN EDITOR"
         status={plan.isOpen ? "ACTIVE" : "INACTIVE"}
         statusActive={plan.isOpen}
         onClose={onClose}
@@ -636,7 +629,7 @@ function SelectedItemSection({
   onUpdateRelease,
   onUpdateTarget,
 }: {
-  plan: ExcavationPlan;
+  plan: WeaponPlan;
   selection: Selection | null;
   accent: string;
   onUpdateRelease: (releaseId: string, updates: Partial<Release>) => void;

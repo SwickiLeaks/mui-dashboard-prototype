@@ -3,8 +3,8 @@ import { Box, CssBaseline, Paper } from "@mui/material";
 import { ThemeProvider } from "@mui/material/styles";
 
 import { darkTheme } from "./theme";
-import { excavationPlans as initialExcavationPlans } from "./data/excavationPlans";
-import type { ExcavationPlan, PanelKey } from "./types";
+import { weaponPlans as initialWeaponPlans } from "./data/weaponPlans";
+import type { PanelKey, WeaponPlan } from "./types";
 
 import AppHeader from "./components/AppHeader";
 import DashboardContent from "./components/DashboardContent";
@@ -12,10 +12,10 @@ import PlanDetailDrawer from "./components/PlanDetailDrawer";
 import WizardPanel from "./components/WizardPanel";
 
 export default function App() {
-  const [plans, setPlans] = useState<ExcavationPlan[]>(initialExcavationPlans);
+  const [plans, setPlans] = useState<WeaponPlan[]>(initialWeaponPlans);
   const [expandedControls, setExpandedControls] = useState(false);
   const [selectedPanel, setSelectedPanel] = useState<PanelKey | null>(null);
-  const [selectedPlan, setSelectedPlan] = useState<ExcavationPlan | null>(null);
+  const [selectedPlan, setSelectedPlan] = useState<WeaponPlan | null>(null);
   const [drawerOpen, setDrawerOpen] = useState(false);
 
   useEffect(() => {
@@ -56,7 +56,7 @@ export default function App() {
     setSelectedPanel(null);
   };
 
-  const handlePlanSelect = (plan: ExcavationPlan) => {
+  const handlePlanSelect = (plan: WeaponPlan) => {
     setSelectedPlan(plan);
     setDrawerOpen(true);
   };
@@ -96,7 +96,7 @@ export default function App() {
     setSelectedPanel("library");
   };
 
-  const handleUpdatePlan = (updatedPlan: ExcavationPlan) => {
+  const handleUpdatePlan = (updatedPlan: WeaponPlan) => {
     setPlans((currentPlans) =>
       currentPlans.map((plan) =>
         plan.id === updatedPlan.id ? updatedPlan : plan

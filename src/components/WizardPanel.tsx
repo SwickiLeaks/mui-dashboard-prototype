@@ -1,5 +1,5 @@
 import { Box } from "@mui/material";
-import type { ExcavationPlan, PanelKey } from "../types";
+import type { PanelKey, WeaponPlan } from "../types";
 
 import { tacticalSurface } from "../tactical";
 
@@ -11,9 +11,9 @@ import ReviewPanel from "../panels/ReviewPanel";
 
 type WizardPanelProps = {
   selectedPanel: PanelKey;
-  selectedPlan: ExcavationPlan | null;
-  plans: ExcavationPlan[];
-  onSelectPlan: (plan: ExcavationPlan) => void;
+  selectedPlan: WeaponPlan | null;
+  plans: WeaponPlan[];
+  onSelectPlan: (plan: WeaponPlan) => void;
   onClosePlan: (planId: string) => void;
   onCloseAllPlans: () => void;
   onOpenPlans: (planIds: string[]) => void;
