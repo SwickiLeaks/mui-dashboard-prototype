@@ -39,7 +39,7 @@ export default function OpenPlansPanel({
       <ClassificationBanner
         accent={PANEL_ACCENT}
         label="OPEN PLANS"
-        status={isEmpty ? "STANDBY" : `${openPlans.length} ACTIVE`}
+        status={isEmpty ? "STANDBY" : `${openPlans.length} OPEN`}
         statusActive={!isEmpty}
         rightSlot={
           !isEmpty ? (

@@ -2,10 +2,11 @@ import { Box, Button, Stack, Typography } from "@mui/material";
 
 import CloseIcon from "@mui/icons-material/Close";
 
+import { categoryColor } from "../../../categoryColors";
 import { monoFont, tacticalSurface } from "../../../theme";
 import { formatMilitaryShort } from "../../../utils/formatting";
 import type { WeaponPlan } from "../../../types";
-import { PANEL_ACCENT, closeButtonSx } from "../styles";
+import { closeButtonSx } from "../styles";
 import AssociationRow from "./AssociationRow";
 
 type PlanCardProps = {
@@ -27,6 +28,7 @@ export default function PlanCard({
   onOpenAssociation,
   onDisassociate,
 }: PlanCardProps) {
+  const accent = categoryColor[plan.category];
   return (
     <Box
       onClick={onSelect}
@@ -68,7 +70,7 @@ export default function PlanCard({
           sx={{
             width: 3,
             height: 14,
-            bgcolor: PANEL_ACCENT,
+            bgcolor: accent,
             flexShrink: 0,
           }}
         />
@@ -86,6 +88,25 @@ export default function PlanCard({
         >
           {plan.name.toUpperCase()}
         </Typography>
+        {selected && (
+          <Box
+            sx={{
+              px: 0.85,
+              py: 0.25,
+              borderRadius: 0.5,
+              fontFamily: monoFont,
+              fontSize: 9.5,
+              fontWeight: 700,
+              letterSpacing: 1.4,
+              color: "#a5d6a7",
+              bgcolor: "rgba(165,214,167,0.12)",
+              border: "1px solid rgba(165,214,167,0.4)",
+              flexShrink: 0,
+            }}
+          >
+            ACTIVE
+          </Box>
+        )}
         <Typography
           sx={{
             fontFamily: monoFont,
@@ -149,6 +170,7 @@ export default function PlanCard({
                           key={linked.id}
                           name={linked.name}
                           isOpen={linked.isOpen}
+                          accent={categoryColor[linked.category]}
                           onOpen={() => onOpenAssociation(linked.id)}
                           onUnlink={() => onDisassociate(plan.id, linked.id)}
                         />

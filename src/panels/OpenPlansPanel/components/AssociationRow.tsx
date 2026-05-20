@@ -10,6 +10,7 @@ import { dangerMicroActionSx, microActionSx } from "../styles";
 type AssociationRowProps = {
   name: string;
   isOpen: boolean;
+  accent: string;
   onOpen: () => void;
   onUnlink: () => void;
 };
@@ -17,6 +18,7 @@ type AssociationRowProps = {
 export default function AssociationRow({
   name,
   isOpen,
+  accent,
   onOpen,
   onUnlink,
 }: AssociationRowProps) {
@@ -46,9 +48,9 @@ export default function AssociationRow({
           display: "grid",
           placeItems: "center",
           flexShrink: 0,
-          bgcolor: "rgba(144,202,249,0.08)",
-          color: "#90caf9",
-          border: "1px solid rgba(144,202,249,0.22)",
+          bgcolor: `${accent}1c`,
+          color: accent,
+          border: `1px solid ${accent}40`,
         }}
       >
         <ArticleIcon sx={{ fontSize: 13 }} />
@@ -73,7 +75,7 @@ export default function AssociationRow({
               flexShrink: 0,
             }}
           >
-            ACTIVE
+            OPEN
           </Typography>
         )}
       </Stack>

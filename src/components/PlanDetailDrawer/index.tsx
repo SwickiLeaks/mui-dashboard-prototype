@@ -9,11 +9,12 @@ import {
 } from "../../theme";
 import type { Release, Target, WeaponPlan } from "../../types";
 
+import { categoryColor } from "../../categoryColors";
+
 import DefaultReleaseSettings from "./components/DefaultReleaseSettings";
 import PlanNameSection from "./components/PlanNameSection";
 import PlanOverviewTree from "./components/PlanOverviewTree";
 import SelectedItemSection from "./components/SelectedItemSection";
-import { categoryColor } from "./styles";
 import type { Selection } from "./types";
 import { hasCoordinates } from "./utils";
 
@@ -110,8 +111,8 @@ export default function PlanDetailDrawer({
       <ClassificationBanner
         accent={accent}
         label="WEAPON PLAN EDITOR"
-        status={plan.isOpen ? "ACTIVE" : "INACTIVE"}
-        statusActive={plan.isOpen}
+        status="ACTIVE"
+        statusActive
         onClose={onClose}
       />
 
