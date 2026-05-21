@@ -7,7 +7,7 @@ import OpenPlansPanel from "../panels/OpenPlansPanel";
 import CreatePanel from "../panels/CreatePanel";
 import LibraryPanel from "../panels/LibraryPanel";
 import ToolsPanel from "../panels/ToolsPanel";
-import ReviewPanel from "../panels/ReviewPanel";
+import TransferPanel from "../panels/TransferPanel";
 
 type WizardPanelProps = {
   selectedPanel: PanelKey;
@@ -87,7 +87,7 @@ export default function WizardPanel({
           <LibraryPanel plans={plans} onOpenPlans={onOpenPlans} onClose={onClose} />
         )}
         {selectedPanel === "tools" && <ToolsPanel onClose={onClose} />}
-        {selectedPanel === "review" && <ReviewPanel onClose={onClose} />}
+        {selectedPanel === "transfer" && <TransferPanel onClose={onClose} />}
       </Box>
     </Box>
   );

@@ -2,12 +2,12 @@ import { Box, Button, Stack } from "@mui/material";
 
 import CloseIcon from "@mui/icons-material/Close";
 
-import { ClassificationBanner, scrollbarTacticalSx } from "../../theme";
+import { ClassificationBanner, appAccent, scrollbarTacticalSx } from "../../theme";
 import type { WeaponPlan } from "../../types";
 
 import EmptyState from "./components/EmptyState";
 import PlanCard from "./components/PlanCard";
-import { PANEL_ACCENT, closeAllButtonSx } from "./styles";
+import { closeAllButtonSx } from "./styles";
 
 type OpenPlansPanelProps = {
   plans: WeaponPlan[];
@@ -37,7 +37,7 @@ export default function OpenPlansPanel({
   return (
     <>
       <ClassificationBanner
-        accent={PANEL_ACCENT}
+        accent={appAccent}
         label="OPEN PLANS"
         status={isEmpty ? "STANDBY" : `${openPlans.length} OPEN`}
         statusActive={!isEmpty}

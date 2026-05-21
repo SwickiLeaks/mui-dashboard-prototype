@@ -1,6 +1,15 @@
 import { Box, Stack, Typography } from "@mui/material";
 
-import { monoFont, scrollbarTacticalSx, tacticalSurface } from "../../../theme";
+import ChangeHistoryIcon from "@mui/icons-material/ChangeHistory";
+import GpsFixedIcon from "@mui/icons-material/GpsFixed";
+
+import { categoryColor } from "../../../categoryColors";
+import {
+  StatPill,
+  monoFont,
+  scrollbarTacticalSx,
+  tacticalSurface,
+} from "../../../theme";
 import { formatMilitaryShort } from "../../../utils/formatting";
 import type { WeaponPlan } from "../../../types";
 import { cardOuterSx } from "../styles";
@@ -73,6 +82,7 @@ export default function ItemList({
     >
       {plans.map((plan) => {
         const selected = pendingPlanIds.includes(plan.id);
+        const cardAccent = categoryColor[plan.category];
         return (
           <Box
             key={plan.id}
@@ -106,7 +116,12 @@ export default function ItemList({
               }}
             >
               <Box
-                sx={{ width: 3, height: 14, bgcolor: accent, flexShrink: 0 }}
+                sx={{
+                  width: 3,
+                  height: 14,
+                  bgcolor: cardAccent,
+                  flexShrink: 0,
+                }}
               />
               <Typography
                 sx={{
@@ -146,7 +161,7 @@ export default function ItemList({
             </Box>
 
             <Box sx={{ p: 1.75 }}>
-              <Stack spacing={1}>
+              <Stack spacing={1.25}>
                 <Typography
                   sx={{
                     fontFamily: monoFont,
@@ -159,6 +174,18 @@ export default function ItemList({
                   DRAFTED BY {plan.createdBy.toUpperCase()} ·{" "}
                   {formatMilitaryShort(plan.modificationDate)}
                 </Typography>
+                <Stack direction="row" spacing={0.85}>
+                  <StatPill
+                    icon={<ChangeHistoryIcon sx={{ fontSize: 14 }} />}
+                    label="RELEASES"
+                    count={plan.releases.length}
+                  />
+                  <StatPill
+                    icon={<GpsFixedIcon sx={{ fontSize: 14 }} />}
+                    label="TARGETS"
+                    count={plan.targets.length}
+                  />
+                </Stack>
                 <Typography
                   sx={{
                     fontSize: 13,

@@ -4,12 +4,11 @@ import { Box, Stack } from "@mui/material";
 import {
   ClassificationBanner,
   TacticalSection,
+  appAccent,
   scrollbarTacticalSx,
   tacticalSurface,
 } from "../../theme";
 import type { Release, Target, WeaponPlan } from "../../types";
-
-import { categoryColor } from "../../categoryColors";
 
 import DefaultReleaseSettings from "./components/DefaultReleaseSettings";
 import PlanNameSection from "./components/PlanNameSection";
@@ -42,7 +41,9 @@ export default function PlanDetailDrawer({
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [plan.id]);
 
-  const accent = categoryColor[plan.category];
+  // Drawer chrome is teal across all plans; per-plan identity stays on the
+  // plan-card stripes in OpenPlansPanel / LibraryPanel.
+  const accent = appAccent;
 
   const targetById = useMemo(
     () => new Map(plan.targets.map((t) => [t.id, t])),
@@ -109,7 +110,7 @@ export default function PlanDetailDrawer({
       }}
     >
       <ClassificationBanner
-        accent={accent}
+        accent={appAccent}
         label="WEAPON PLAN EDITOR"
         status="ACTIVE"
         statusActive

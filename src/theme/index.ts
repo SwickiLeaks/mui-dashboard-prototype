@@ -6,6 +6,8 @@
  */
 export { darkTheme } from "./muiTheme";
 export {
+  appAccent,
+  bodyFont,
   monoFont,
   monoLabelSx,
   monoValueSx,
@@ -13,4 +15,9 @@ export {
   selectionStyles,
   tacticalSurface,
 } from "./tokens";
-export { ClassificationBanner, DataRow, TacticalSection } from "./components";
+export {
+  ClassificationBanner,
+  DataRow,
+  StatPill,
+  TacticalSection,
+} from "./components";

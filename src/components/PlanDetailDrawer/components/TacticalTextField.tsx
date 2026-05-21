@@ -42,9 +42,7 @@ export default function TacticalTextField({
         variant="outlined"
         sx={{
           "& .MuiOutlinedInput-root": {
-            fontFamily: monoFont,
-            fontSize: 12.5,
-            letterSpacing: 0.4,
+            fontSize: 13,
             bgcolor: "#141414",
             borderRadius: 0.5,
             "& fieldset": { borderColor: tacticalSurface.border },

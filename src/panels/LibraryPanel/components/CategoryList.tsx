@@ -2,23 +2,19 @@ import { Box, Stack, Typography } from "@mui/material";
 
 import ChevronRightIcon from "@mui/icons-material/ChevronRight";
 
+import { categoryColor } from "../../../categoryColors";
 import { monoFont, scrollbarTacticalSx, tacticalSurface } from "../../../theme";
 import type { PlanCategory } from "../../../types";
 import { categories } from "../data";
-import { cardOuterSx } from "../styles";
+import { LIBRARY_ACCENT, cardOuterSx } from "../styles";
 import CountChip from "./CountChip";
 
 type CategoryListProps = {
   counts: Record<PlanCategory, number>;
-  accent: string;
   onSelect: (category: PlanCategory) => void;
 };
 
-export default function CategoryList({
-  counts,
-  accent,
-  onSelect,
-}: CategoryListProps) {
+export default function CategoryList({ counts, onSelect }: CategoryListProps) {
   return (
     <Stack
       spacing={1}
@@ -33,6 +29,7 @@ export default function CategoryList({
       {categories.map((category) => {
         const count = counts[category.key];
         const empty = count === 0;
+        const sprinkle = categoryColor[category.key];
         return (
           <Box
             key={category.key}
@@ -43,13 +40,13 @@ export default function CategoryList({
               opacity: empty ? 0.55 : 1,
               "&:hover": !empty
                 ? {
-                    borderColor: accent,
+                    borderColor: LIBRARY_ACCENT,
                     bgcolor: tacticalSurface.cardHover,
-                    boxShadow: `0 0 0 1px ${accent}33`,
+                    boxShadow: `0 0 0 1px ${LIBRARY_ACCENT}33`,
                   }
                 : undefined,
               "&:hover .category-chevron": !empty
-                ? { transform: "translateX(3px)", color: accent }
+                ? { transform: "translateX(3px)", color: LIBRARY_ACCENT }
                 : undefined,
             }}
           >
@@ -65,7 +62,7 @@ export default function CategoryList({
               }}
             >
               <Box
-                sx={{ width: 3, height: 14, bgcolor: accent, flexShrink: 0 }}
+                sx={{ width: 3, height: 14, bgcolor: sprinkle, flexShrink: 0 }}
               />
               <Typography
                 sx={{
@@ -96,7 +93,7 @@ export default function CategoryList({
                   EMPTY
                 </Typography>
               ) : (
-                <CountChip count={count} accent={accent} />
+                <CountChip count={count} accent={LIBRARY_ACCENT} />
               )}
             </Box>
 
@@ -110,7 +107,7 @@ export default function CategoryList({
                     display: "grid",
                     placeItems: "center",
                     bgcolor: "rgba(255,255,255,0.04)",
-                    color: empty ? "text.secondary" : accent,
+                    color: empty ? "text.secondary" : sprinkle,
                     border: "1px solid rgba(255,255,255,0.1)",
                     flexShrink: 0,
                   }}

@@ -214,3 +214,84 @@ export function DataRow({ label, value }: DataRowProps) {
     </Stack>
   );
 }
+
+type StatPillProps = {
+  icon?: React.ReactNode;
+  label: string;
+  count: number;
+};
+
+/**
+ * Tactical stat readout — icon + count + uppercase label. The icon and the
+ * count-label group are centered to each other in the row, and the count
+ * and label share a text baseline inside that group, so all three read as
+ * one tight horizontal unit. Empty (count===0) dims to a "no data" state.
+ */
+export function StatPill({ icon, label, count }: StatPillProps) {
+  const populated = count > 0;
+  const valueColor = populated ? "text.primary" : "rgba(255,255,255,0.32)";
+  return (
+    <Box
+      sx={{
+        display: "inline-flex",
+        alignItems: "center",
+        gap: 0.75,
+        px: 0.95,
+        py: 0.5,
+        borderRadius: 0.5,
+        bgcolor: populated
+          ? "rgba(255,255,255,0.06)"
+          : "rgba(255,255,255,0.025)",
+        border: `1px solid ${
+          populated ? "rgba(255,255,255,0.18)" : "rgba(255,255,255,0.08)"
+        }`,
+      }}
+    >
+      {icon && (
+        <Box
+          sx={{
+            display: "inline-flex",
+            alignItems: "center",
+            color: valueColor,
+            "& > svg": { display: "block" },
+          }}
+        >
+          {icon}
+        </Box>
+      )}
+      <Box
+        sx={{
+          display: "inline-flex",
+          alignItems: "baseline",
+          gap: 0.6,
+        }}
+      >
+        <Typography
+          component="span"
+          sx={{
+            fontFamily: monoFont,
+            fontSize: 13,
+            fontWeight: 700,
+            lineHeight: 1,
+            color: valueColor,
+          }}
+        >
+          {count}
+        </Typography>
+        <Typography
+          component="span"
+          sx={{
+            fontFamily: monoFont,
+            fontSize: 10,
+            fontWeight: 700,
+            lineHeight: 1,
+            letterSpacing: 1.3,
+            color: "text.secondary",
+          }}
+        >
+          {label}
+        </Typography>
+      </Box>
+    </Box>
+  );
+}

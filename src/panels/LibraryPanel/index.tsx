@@ -3,7 +3,7 @@ import { Box, Breadcrumbs } from "@mui/material";
 
 import NavigateNextIcon from "@mui/icons-material/NavigateNext";
 
-import { ClassificationBanner, tacticalSurface } from "../../theme";
+import { ClassificationBanner, appAccent, tacticalSurface } from "../../theme";
 import type { LibraryBucket, PlanCategory, WeaponPlan } from "../../types";
 
 import BreadcrumbSegment from "./components/BreadcrumbSegment";
@@ -14,7 +14,7 @@ import FilterButton from "./components/FilterButton";
 import FooterBar from "./components/FooterBar";
 import ItemList from "./components/ItemList";
 import { buckets, categories } from "./data";
-import { LIBRARY_DEFAULT_ACCENT } from "./styles";
+import { LIBRARY_ACCENT } from "./styles";
 import type { LibraryPath, PlanFilter } from "./types";
 import { getView, scopeForPath } from "./utils";
 
@@ -39,7 +39,6 @@ export default function LibraryPanel({
   const view = getView(path);
   const bucketMeta = buckets.find((b) => b.key === path.bucket);
   const categoryMeta = categories.find((c) => c.key === path.category);
-  const accent = bucketMeta?.accent ?? LIBRARY_DEFAULT_ACCENT;
 
   const bucketCounts = useMemo(
     () =>
@@ -142,7 +141,7 @@ export default function LibraryPanel({
   return (
     <>
       <ClassificationBanner
-        accent={accent}
+        accent={appAccent}
         label="LIBRARY"
         status={statusLabel}
       />
@@ -235,25 +234,17 @@ export default function LibraryPanel({
           <BucketGrid counts={bucketCounts} onSelect={enterBucket} />
         )}
         {view === "categories" && (
-          <CategoryList
-            counts={categoryCounts}
-            accent={accent}
-            onSelect={enterCategory}
-          />
+          <CategoryList counts={categoryCounts} onSelect={enterCategory} />
         )}
         {view === "crew" && (
-          <CrewList
-            crewMembers={crewMembers}
-            accent={accent}
-            onSelect={enterCrew}
-          />
+          <CrewList crewMembers={crewMembers} onSelect={enterCrew} />
         )}
         {view === "items" && (
           <ItemList
             plans={items}
             filter={filter}
             pendingPlanIds={pendingPlanIds}
-            accent={accent}
+            accent={LIBRARY_ACCENT}
             onToggle={togglePlan}
           />
         )}
@@ -261,7 +252,7 @@ export default function LibraryPanel({
 
       {view === "items" && (
         <FooterBar
-          accent={accent}
+          accent={appAccent}
           hasSelection={hasSelection}
           count={pendingPlans.length}
           onCancel={onClose}

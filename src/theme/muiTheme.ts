@@ -1,6 +1,6 @@
 import { createTheme } from "@mui/material/styles";
 
-import { monoFont } from "./tokens";
+import { bodyFont } from "./tokens";
 
 export const darkTheme = createTheme({
   palette: {
@@ -18,7 +18,7 @@ export const darkTheme = createTheme({
     },
   },
   typography: {
-    fontFamily: monoFont,
+    fontFamily: bodyFont,
   },
   components: {
     MuiPaper: {

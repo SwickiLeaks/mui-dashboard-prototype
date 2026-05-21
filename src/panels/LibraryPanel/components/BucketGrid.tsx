@@ -5,7 +5,7 @@ import ChevronRightIcon from "@mui/icons-material/ChevronRight";
 import { monoFont, scrollbarTacticalSx, tacticalSurface } from "../../../theme";
 import type { LibraryBucket } from "../../../types";
 import { buckets } from "../data";
-import { cardOuterSx } from "../styles";
+import { LIBRARY_ACCENT, cardOuterSx } from "../styles";
 import CountChip from "./CountChip";
 
 type BucketGridProps = {
@@ -34,13 +34,13 @@ export default function BucketGrid({ counts, onSelect }: BucketGridProps) {
             sx={{
               ...cardOuterSx,
               "&:hover": {
-                borderColor: bucket.accent,
+                borderColor: LIBRARY_ACCENT,
                 bgcolor: tacticalSurface.cardHover,
-                boxShadow: `0 0 0 1px ${bucket.accent}33, 0 8px 22px ${bucket.accent}1a`,
+                boxShadow: `0 0 0 1px ${LIBRARY_ACCENT}33, 0 8px 22px ${LIBRARY_ACCENT}1a`,
               },
               "&:hover .bucket-chevron": {
                 transform: "translateX(3px)",
-                color: bucket.accent,
+                color: LIBRARY_ACCENT,
               },
             }}
           >
@@ -59,7 +59,7 @@ export default function BucketGrid({ counts, onSelect }: BucketGridProps) {
                 sx={{
                   width: 3,
                   height: 14,
-                  bgcolor: bucket.accent,
+                  bgcolor: LIBRARY_ACCENT,
                   flexShrink: 0,
                 }}
               />
@@ -75,7 +75,7 @@ export default function BucketGrid({ counts, onSelect }: BucketGridProps) {
               >
                 {bucket.label.toUpperCase()}
               </Typography>
-              <CountChip count={count} accent={bucket.accent} />
+              <CountChip count={count} accent={LIBRARY_ACCENT} />
             </Box>
 
             <Box sx={{ p: 1.75 }}>
@@ -87,9 +87,9 @@ export default function BucketGrid({ counts, onSelect }: BucketGridProps) {
                     borderRadius: 0.5,
                     display: "grid",
                     placeItems: "center",
-                    bgcolor: `${bucket.accent}1a`,
-                    color: bucket.accent,
-                    border: `1px solid ${bucket.accent}40`,
+                    bgcolor: `${LIBRARY_ACCENT}1a`,
+                    color: LIBRARY_ACCENT,
+                    border: `1px solid ${LIBRARY_ACCENT}40`,
                     flexShrink: 0,
                   }}
                 >

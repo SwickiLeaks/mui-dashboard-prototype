@@ -1,9 +1,15 @@
 import { tacticalSurface } from "../../theme";
 
-/** Fallback accent color when no bucket is selected (banner at root view). */
-export const LIBRARY_DEFAULT_ACCENT = "#ffd54f";
+/**
+ * Library chrome accent (banner, breadcrumb hover, bucket/crew cards, count
+ * chips, footer button, item selection ring). Intentionally neutral so the
+ * bright category colors stay reserved for plan tiles and the right drawer.
+ * The only category-color sprinkles in the library are the category-card
+ * stripe and icon, and the plan-card stripes in the items view.
+ */
+export const LIBRARY_ACCENT = "#bdbdbd";
 
-/** Shared card outer treatment used by Bucket, Category, Crew, and Item cards. */
+/** Shared outer card treatment for plan rows in the library list. */
 export const cardOuterSx = {
   flexShrink: 0,
   bgcolor: tacticalSurface.card,

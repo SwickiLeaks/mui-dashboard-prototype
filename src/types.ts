@@ -1,4 +1,4 @@
-export type PanelKey = "map" | "create" | "library" | "tools" | "review";
+export type PanelKey = "map" | "create" | "library" | "tools" | "transfer";
 
 export type PlanCategory = "weapon" | "network" | "comm" | "e2";
 

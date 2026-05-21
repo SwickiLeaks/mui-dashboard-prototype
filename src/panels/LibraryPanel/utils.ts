@@ -1,7 +1,8 @@
 import type { WeaponPlan } from "../../types";
 import type { LibraryPath, View } from "./types";
 
-/** Filter the plans array to those matching the current library path. */
+/** Plans matching the current path's bucket / crew constraint (no category
+ * filter applied — that happens at the items step). */
 export const scopeForPath = (
   plans: WeaponPlan[],
   path: LibraryPath
@@ -16,7 +17,7 @@ export const scopeForPath = (
   });
 };
 
-/** Resolve which view (root, categories, crew, items) the current path lands on. */
+/** Which view (root / categories / crew / items) the current path lands on. */
 export const getView = (path: LibraryPath): View => {
   if (!path.bucket) return "root";
   if (path.bucket === "aircrew" && !path.crew) return "crew";
@@ -24,7 +25,7 @@ export const getView = (path: LibraryPath): View => {
   return "items";
 };
 
-/** Two-letter initials for a crew member's avatar tile. */
+/** Two-letter initials for the crew avatar tile. */
 export const initials = (name: string) =>
   name
     .split(/\s+/)

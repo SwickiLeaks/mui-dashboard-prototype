@@ -1,13 +1,19 @@
-import { Box, Button, Stack, Typography } from "@mui/material";
+import { Box, Button, IconButton, Stack, Typography } from "@mui/material";
 
+import ArticleIcon from "@mui/icons-material/Article";
+import ChangeHistoryIcon from "@mui/icons-material/ChangeHistory";
 import CloseIcon from "@mui/icons-material/Close";
+import FlagIcon from "@mui/icons-material/Flag";
+import GpsFixedIcon from "@mui/icons-material/GpsFixed";
+import LayersIcon from "@mui/icons-material/Layers";
 
 import { categoryColor } from "../../../categoryColors";
-import { monoFont, tacticalSurface } from "../../../theme";
+import { StatPill, monoFont, tacticalSurface } from "../../../theme";
 import { formatMilitaryShort } from "../../../utils/formatting";
 import type { WeaponPlan } from "../../../types";
-import { closeButtonSx } from "../styles";
 import AssociationRow from "./AssociationRow";
+
+const noop = () => {};
 
 type PlanCardProps = {
   plan: WeaponPlan;
@@ -61,7 +67,7 @@ export default function PlanCard({
           alignItems: "center",
           gap: 1,
           px: 1.5,
-          py: 1,
+          py: 0.85,
           bgcolor: tacticalSurface.cardHeader,
           borderBottom: `1px solid ${tacticalSurface.hairline}`,
         }}
@@ -107,18 +113,28 @@ export default function PlanCard({
             ACTIVE
           </Box>
         )}
-        <Typography
+        <IconButton
+          size="small"
+          title="Close plan"
+          onClick={(event) => {
+            event.stopPropagation();
+            onClose();
+          }}
           sx={{
-            fontFamily: monoFont,
-            fontSize: 10.5,
-            letterSpacing: 1.1,
-            fontWeight: 700,
+            width: 24,
+            height: 24,
+            borderRadius: 0.5,
             color: "text.secondary",
             flexShrink: 0,
+            transition: "color 140ms ease, background-color 140ms ease",
+            "&:hover": {
+              color: "#ff8a8a",
+              bgcolor: "rgba(255,120,120,0.12)",
+            },
           }}
         >
-          {formatMilitaryShort(plan.modificationDate)}
-        </Typography>
+          <CloseIcon sx={{ fontSize: 14 }} />
+        </IconButton>
       </Box>
 
       <Box sx={{ p: 1.75 }}>
@@ -132,12 +148,24 @@ export default function PlanCard({
               color: "text.secondary",
             }}
           >
-            DRAFTED BY {plan.createdBy.toUpperCase()}
+            DRAFTED BY {plan.createdBy.toUpperCase()} ·{" "}
+            {formatMilitaryShort(plan.modificationDate)}
           </Typography>
 
-          <Typography
-            sx={{ color: "text.secondary", fontSize: 13.5, lineHeight: 1.55 }}
-          >
+          <Stack direction="row" spacing={0.85}>
+            <StatPill
+              icon={<ChangeHistoryIcon sx={{ fontSize: 14 }} />}
+              label="RELEASES"
+              count={plan.releases.length}
+            />
+            <StatPill
+              icon={<GpsFixedIcon sx={{ fontSize: 14 }} />}
+              label="TARGETS"
+              count={plan.targets.length}
+            />
+          </Stack>
+
+          <Typography sx={{ color: "text.secondary", fontSize: 13.5, lineHeight: 1.55 }}>
             {plan.description}
           </Typography>
 
@@ -150,20 +178,31 @@ export default function PlanCard({
                 borderTop: `1px dashed ${tacticalSurface.hairline}`,
               }}
             >
-              <Stack spacing={1.5}>
-                {linkedPlans.length > 0 ? (
-                  <>
-                    <Typography
-                      sx={{
-                        fontFamily: monoFont,
-                        fontSize: 10.5,
-                        letterSpacing: 1.4,
-                        fontWeight: 700,
-                        color: "text.secondary",
-                      }}
-                    >
-                      LINKED PLANS · {linkedPlans.length}
-                    </Typography>
+              <Stack spacing={1.75}>
+                <Stack spacing={1}>
+                  <SectionLabel>ACTIONS</SectionLabel>
+                  <Stack spacing={0.75}>
+                    <ActionButton
+                      icon={<FlagIcon sx={{ fontSize: 14 }} />}
+                      label="Associate Mission"
+                      onClick={noop}
+                    />
+                    <ActionButton
+                      icon={<LayersIcon sx={{ fontSize: 14 }} />}
+                      label="Associate Shape Collection"
+                      onClick={noop}
+                    />
+                    <ActionButton
+                      icon={<ArticleIcon sx={{ fontSize: 14 }} />}
+                      label="Associate Plan"
+                      onClick={noop}
+                    />
+                  </Stack>
+                </Stack>
+
+                {linkedPlans.length > 0 && (
+                  <Stack spacing={1}>
+                    <SectionLabel>LINKED PLANS · {linkedPlans.length}</SectionLabel>
                     <Stack spacing={0.75}>
                       {linkedPlans.map((linked) => (
                         <AssociationRow
@@ -176,30 +215,8 @@ export default function PlanCard({
                         />
                       ))}
                     </Stack>
-                  </>
-                ) : (
-                  <Typography
-                    sx={{
-                      fontFamily: monoFont,
-                      fontSize: 11,
-                      letterSpacing: 1.2,
-                      color: "text.secondary",
-                    }}
-                  >
-                    NO LINKED PLANS
-                  </Typography>
+                  </Stack>
                 )}
-
-                <Stack direction="row" justifyContent="flex-end">
-                  <Button
-                    size="small"
-                    startIcon={<CloseIcon sx={{ fontSize: 13 }} />}
-                    onClick={onClose}
-                    sx={closeButtonSx}
-                  >
-                    Close Plan
-                  </Button>
-                </Stack>
               </Stack>
             </Box>
           )}
@@ -208,3 +225,65 @@ export default function PlanCard({
     </Box>
   );
 }
+
+function SectionLabel({ children }: { children: React.ReactNode }) {
+  return (
+    <Typography
+      sx={{
+        fontFamily: monoFont,
+        fontSize: 10.5,
+        letterSpacing: 1.4,
+        fontWeight: 700,
+        color: "text.secondary",
+      }}
+    >
+      {children}
+    </Typography>
+  );
+}
+
+function ActionButton({
+  icon,
+  label,
+  onClick,
+}: {
+  icon: React.ReactNode;
+  label: string;
+  onClick: () => void;
+}) {
+  return (
+    <Button
+      startIcon={icon}
+      onClick={onClick}
+      fullWidth
+      sx={{
+        height: 34,
+        justifyContent: "flex-start",
+        px: 1.25,
+        borderRadius: 0.5,
+        fontFamily: monoFont,
+        fontSize: 11,
+        fontWeight: 700,
+        letterSpacing: 1.3,
+        textTransform: "uppercase",
+        color: "text.secondary",
+        bgcolor: "rgba(255,255,255,0.04)",
+        border: "1px solid rgba(255,255,255,0.1)",
+        transition:
+          "background-color 140ms ease, border-color 160ms ease, color 140ms ease",
+        "& .MuiButton-startIcon": {
+          mr: 1.1,
+          marginLeft: 0,
+        },
+        "&:hover": {
+          color: "text.primary",
+          bgcolor: "rgba(255,255,255,0.08)",
+          borderColor: "rgba(255,255,255,0.22)",
+        },
+      }}
+    >
+      {label}
+    </Button>
+  );
+}
+

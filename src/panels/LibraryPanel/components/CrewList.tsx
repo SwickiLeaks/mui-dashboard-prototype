@@ -3,21 +3,16 @@ import { Box, Stack, Typography } from "@mui/material";
 import ChevronRightIcon from "@mui/icons-material/ChevronRight";
 
 import { monoFont, scrollbarTacticalSx, tacticalSurface } from "../../../theme";
-import { cardOuterSx } from "../styles";
+import { LIBRARY_ACCENT, cardOuterSx } from "../styles";
 import { initials } from "../utils";
 import CountChip from "./CountChip";
 
 type CrewListProps = {
   crewMembers: Array<{ name: string; count: number }>;
-  accent: string;
   onSelect: (crew: string) => void;
 };
 
-export default function CrewList({
-  crewMembers,
-  accent,
-  onSelect,
-}: CrewListProps) {
+export default function CrewList({ crewMembers, onSelect }: CrewListProps) {
   if (crewMembers.length === 0) {
     return (
       <Box sx={{ p: 1.5 }}>
@@ -62,13 +57,13 @@ export default function CrewList({
           sx={{
             ...cardOuterSx,
             "&:hover": {
-              borderColor: accent,
+              borderColor: LIBRARY_ACCENT,
               bgcolor: tacticalSurface.cardHover,
-              boxShadow: `0 0 0 1px ${accent}33`,
+              boxShadow: `0 0 0 1px ${LIBRARY_ACCENT}33`,
             },
             "&:hover .crew-chevron": {
               transform: "translateX(3px)",
-              color: accent,
+              color: LIBRARY_ACCENT,
             },
           }}
         >
@@ -82,9 +77,9 @@ export default function CrewList({
                   display: "grid",
                   placeItems: "center",
                   flexShrink: 0,
-                  bgcolor: `${accent}1c`,
-                  color: accent,
-                  border: `1px solid ${accent}55`,
+                  bgcolor: `${LIBRARY_ACCENT}1c`,
+                  color: LIBRARY_ACCENT,
+                  border: `1px solid ${LIBRARY_ACCENT}55`,
                   fontFamily: monoFont,
                   fontSize: 13,
                   fontWeight: 700,
@@ -119,7 +114,7 @@ export default function CrewList({
                 </Typography>
               </Box>
 
-              <CountChip count={count} accent={accent} />
+              <CountChip count={count} accent={LIBRARY_ACCENT} />
               <ChevronRightIcon
                 className="crew-chevron"
                 sx={{

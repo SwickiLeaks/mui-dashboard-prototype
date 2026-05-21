@@ -6,8 +6,31 @@
  * swap the values here to retheme without touching component code.
  */
 
+/**
+ * Tactical / mono font. Use for labels, banner text, status pills, button
+ * labels, count chips, tree-row tactical names, and any element where the
+ * military-readout aesthetic should read. Reach for it via
+ * `sx={{ fontFamily: monoFont }}` — without that, components inherit `bodyFont`
+ * from the MUI theme.
+ */
 export const monoFont =
   '"Chakra Petch", ui-monospace, "SFMono-Regular", Menlo, Consolas, monospace';
+
+/**
+ * Default body font. Wired into the MUI theme's `typography.fontFamily`, so
+ * everything that doesn't explicitly set `monoFont` falls back to this:
+ * descriptions, paragraph text, input field values, regular Typography, etc.
+ */
+export const bodyFont =
+  '"Inter", system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif';
+
+/**
+ * Unified app chrome accent — a desaturated teal/green. Used by all panel
+ * banners and as a subtle accent on selection rings, header decorations,
+ * and small "ready" indicators. Keep category colors (categoryColor map) for
+ * plan-specific identity; this is the surrounding-frame color.
+ */
+export const appAccent = "#80cbc4";
 
 export const tacticalSurface = {
   panel: "#181818",
@@ -32,7 +55,7 @@ export const selectionStyles = {
   bgRest: "#303030",
   border: "rgba(255, 255, 255, 0.45)",
   borderRest: "#555",
-  ring: "0 0 0 1px rgba(255, 255, 255, 0.18)",
+  ring: "inset 0 0 0 1px rgba(255, 255, 255, 0.18)",
   glow: "0 8px 22px rgba(0, 0, 0, 0.45)",
 };
 

@@ -37,7 +37,7 @@ export default function App() {
         F2: "create",
         F3: "library",
         F4: "tools",
-        F5: "review",
+        F5: "transfer",
       };
 
       const panel = hotkeys[event.key];

@@ -61,7 +61,7 @@ export default function TacticalNumberField({
         sx={{
           "& .MuiOutlinedInput-root": {
             fontFamily: monoFont,
-            fontSize: 12.5,
+            fontSize: 13,
             letterSpacing: 0.4,
             bgcolor: "#141414",
             borderRadius: 0.5,

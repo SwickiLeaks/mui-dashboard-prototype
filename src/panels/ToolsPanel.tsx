@@ -16,6 +16,7 @@ import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
 import {
   ClassificationBanner,
   TacticalSection,
+  appAccent,
   monoFont,
   scrollbarTacticalSx,
   tacticalSurface,
@@ -25,7 +26,7 @@ type ToolsPanelProps = {
   onClose: () => void;
 };
 
-const ACCENT = "#ffab91";
+const ACCENT = appAccent;
 
 type ToolEntry = { icon: React.ReactNode; label: string };
 

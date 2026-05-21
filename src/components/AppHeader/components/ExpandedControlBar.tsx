@@ -23,12 +23,11 @@ export default function ExpandedControlBar({
         display: "flex",
         alignItems: "center",
         overflow: "hidden",
-        ml: expanded ? 1 : 0,
+        ml: 1,
         maxWidth: expanded ? 800 : 0,
         opacity: expanded ? 1 : 0,
-        transform: expanded ? "translateX(0)" : "translateX(-8px)",
         transition:
-          "max-width 280ms cubic-bezier(0.4, 0, 0.2, 1), opacity 220ms ease, transform 240ms cubic-bezier(0.4, 0, 0.2, 1), margin-left 240ms cubic-bezier(0.4, 0, 0.2, 1)",
+          "max-width 280ms cubic-bezier(0.4, 0, 0.2, 1), opacity 220ms ease",
         pointerEvents: expanded ? "auto" : "none",
       }}
     >

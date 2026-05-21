@@ -1,14 +1,21 @@
-import { AppBar, Box, Divider, Toolbar } from "@mui/material";
+import { useState } from "react";
+
+import { AppBar, Box, Divider, Stack, Toolbar } from "@mui/material";
 
 import AppsIcon from "@mui/icons-material/Apps";
+import AssignmentIcon from "@mui/icons-material/Assignment";
+import BuildIcon from "@mui/icons-material/Build";
 import FolderIcon from "@mui/icons-material/Folder";
+import MapIcon from "@mui/icons-material/Map";
+import PublicIcon from "@mui/icons-material/Public";
 
 import type { PanelKey, WeaponPlan } from "../../types";
 
-import CollapsedControlBar from "./components/CollapsedControlBar";
+import AppSwitcherMenu from "./components/AppSwitcherMenu";
 import ExpandedControlBar from "./components/ExpandedControlBar";
 import PlanIndicator from "./components/PlanIndicator";
 import PrimaryIconButton from "./components/PrimaryIconButton";
+import UserAvatar from "./components/UserAvatar";
 
 type AppHeaderProps = {
   expandedControls: boolean;
@@ -18,6 +25,33 @@ type AppHeaderProps = {
   onSelectedPanelChange: React.Dispatch<React.SetStateAction<PanelKey | null>>;
 };
 
+const SLOT_TRANSITION =
+  "max-width 280ms cubic-bezier(0.4, 0, 0.2, 1), opacity 220ms ease, margin-right 280ms cubic-bezier(0.4, 0, 0.2, 1)";
+
+type IconSlotProps = {
+  visible: boolean;
+  collapseGap: boolean;
+  children: React.ReactNode;
+};
+
+function IconSlot({ visible, collapseGap, children }: IconSlotProps) {
+  return (
+    <Box
+      sx={{
+        display: "inline-flex",
+        overflow: "hidden",
+        maxWidth: visible ? 38 : 0,
+        opacity: visible ? 1 : 0,
+        mr: visible && !collapseGap ? 1 : 0,
+        pointerEvents: visible ? "auto" : "none",
+        transition: SLOT_TRANSITION,
+      }}
+    >
+      {children}
+    </Box>
+  );
+}
+
 export default function AppHeader({
   expandedControls,
   selectedPanel,
@@ -25,14 +59,38 @@ export default function AppHeader({
   onExpandedControlsChange,
   onSelectedPanelChange,
 }: AppHeaderProps) {
+  const folderActive = expandedControls;
+  const toolsActive = selectedPanel === "tools";
+  const anyActive = folderActive || toolsActive;
+
+  const [appMenuAnchor, setAppMenuAnchor] = useState<HTMLElement | null>(null);
+  const appMenuOpen = Boolean(appMenuAnchor);
+
+  const handleAppsClick = (event: React.MouseEvent<HTMLButtonElement>) => {
+    setAppMenuAnchor((current) => (current ? null : event.currentTarget));
+  };
+
+  const handleAppMenuClose = () => {
+    setAppMenuAnchor(null);
+  };
+
   const handleFolderClick = () => {
-    onExpandedControlsChange((current) => {
-      const next = !current;
-      if (!next) {
-        onSelectedPanelChange(null);
-      }
-      return next;
-    });
+    if (folderActive) {
+      onExpandedControlsChange(false);
+      onSelectedPanelChange(null);
+    } else {
+      onSelectedPanelChange(null);
+      onExpandedControlsChange(true);
+    }
+  };
+
+  const handleToolsClick = () => {
+    if (toolsActive) {
+      onSelectedPanelChange(null);
+    } else {
+      onExpandedControlsChange(false);
+      onSelectedPanelChange("tools");
+    }
   };
 
   return (
@@ -46,32 +104,47 @@ export default function AppHeader({
         }}
       >
         <Box sx={{ display: "flex", alignItems: "center" }}>
-          <Box sx={{ mr: 1 }}>
-            <PrimaryIconButton>
-              <AppsIcon fontSize="small" />
-            </PrimaryIconButton>
-          </Box>
-
+          <PrimaryIconButton active={appMenuOpen} onClick={handleAppsClick}>
+            <AppsIcon fontSize="small" />
+          </PrimaryIconButton>
           <Divider
             orientation="vertical"
             flexItem
-            sx={{ mr: 1, my: 1, borderColor: "#2a2a2a" }}
+            sx={{ mx: 1, my: 1, borderColor: "#2a2a2a" }}
           />
-
-          <CollapsedControlBar expanded={expandedControls} />
-
-          <Box
-            sx={{
-              ml: expandedControls ? 0 : 1,
-              transition: "margin-left 240ms cubic-bezier(0.4, 0, 0.2, 1)",
-            }}
-          >
-            <PrimaryIconButton
-              active={expandedControls}
-              onClick={handleFolderClick}
+          <Box sx={{ display: "flex", alignItems: "center" }}>
+            <IconSlot visible={!anyActive} collapseGap={anyActive}>
+              <PrimaryIconButton>
+                <PublicIcon fontSize="small" />
+              </PrimaryIconButton>
+            </IconSlot>
+            <IconSlot
+              visible={!anyActive || folderActive}
+              collapseGap={anyActive}
             >
-              <FolderIcon fontSize="small" />
-            </PrimaryIconButton>
+              <PrimaryIconButton
+                active={folderActive}
+                onClick={handleFolderClick}
+              >
+                <FolderIcon fontSize="small" />
+              </PrimaryIconButton>
+            </IconSlot>
+            <IconSlot
+              visible={!anyActive || toolsActive}
+              collapseGap={anyActive}
+            >
+              <PrimaryIconButton
+                active={toolsActive}
+                onClick={handleToolsClick}
+              >
+                <BuildIcon fontSize="small" />
+              </PrimaryIconButton>
+            </IconSlot>
+            <IconSlot visible={!anyActive} collapseGap={anyActive}>
+              <PrimaryIconButton>
+                <AssignmentIcon fontSize="small" />
+              </PrimaryIconButton>
+            </IconSlot>
           </Box>
 
           <ExpandedControlBar
@@ -82,7 +155,30 @@ export default function AppHeader({
         </Box>
 
         <PlanIndicator plan={selectedPlan} />
+
+        <Stack
+          direction="row"
+          spacing={1}
+          alignItems="center"
+          sx={{ ml: "auto" }}
+        >
+          <PrimaryIconButton>
+            <MapIcon fontSize="small" />
+          </PrimaryIconButton>
+          <Divider
+            orientation="vertical"
+            flexItem
+            sx={{ mx: 0.5, my: 1, borderColor: "#2a2a2a" }}
+          />
+          <UserAvatar />
+        </Stack>
       </Toolbar>
+
+      <AppSwitcherMenu
+        anchorEl={appMenuAnchor}
+        open={appMenuOpen}
+        onClose={handleAppMenuClose}
+      />
     </AppBar>
   );
 }
