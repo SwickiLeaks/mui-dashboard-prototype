@@ -1,13 +1,14 @@
+import { appAccent } from "./theme";
 import type { PlanCategory } from "./types";
 
 /**
- * Accent color per plan category. Shared by the right-side drawer (banner /
- * section accents) and the left-side plan tiles (header stripes, association
- * icons). Keep these in sync so a plan's color signature carries across panes.
+ * Per-category accents are intentionally collapsed to a single neutral chrome
+ * color so the UI doesn't surface plan-category as a visual dimension. Plan
+ * identity is carried by the plan name; stripes are kept as a layout anchor.
  */
 export const categoryColor: Record<PlanCategory, string> = {
-  weapon: "#90caf9", // blue
-  network: "#a5d6a7", // green
-  comm: "#ffcc80", // amber
-  e2: "#ef9a9a", // red
+  weapon: appAccent,
+  network: appAccent,
+  comm: appAccent,
+  e2: appAccent,
 };

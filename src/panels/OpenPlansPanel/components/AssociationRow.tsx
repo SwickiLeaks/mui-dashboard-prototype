@@ -12,7 +12,7 @@ type AssociationRowProps = {
   isOpen: boolean;
   accent: string;
   onOpen: () => void;
-  onUnlink: () => void;
+  onDisassociate: () => void;
 };
 
 export default function AssociationRow({
@@ -20,7 +20,7 @@ export default function AssociationRow({
   isOpen,
   accent,
   onOpen,
-  onUnlink,
+  onDisassociate,
 }: AssociationRowProps) {
   return (
     <Box
@@ -71,7 +71,7 @@ export default function AssociationRow({
               fontSize: 10,
               fontWeight: 700,
               letterSpacing: 1.4,
-              color: "#a5d6a7",
+              color: "#90caf9",
               flexShrink: 0,
             }}
           >
@@ -91,10 +91,10 @@ export default function AssociationRow({
         <Button
           size="small"
           startIcon={<LinkOffIcon sx={{ fontSize: 12 }} />}
-          onClick={onUnlink}
+          onClick={onDisassociate}
           sx={dangerMicroActionSx}
         >
-          Unlink
+          Disassociate
         </Button>
       </Stack>
     </Box>

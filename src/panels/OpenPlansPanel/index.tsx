@@ -70,7 +70,7 @@ export default function OpenPlansPanel({
           <Stack spacing={1.5}>
             {openPlans.map((plan) => {
               const isSelected = selectedPlan?.id === plan.id;
-              const linkedPlans = plan.associatedPlanIds
+              const associatedPlans = plan.associatedPlanIds
                 .map((id) => planById.get(id))
                 .filter((p): p is WeaponPlan => Boolean(p));
 
@@ -79,7 +79,7 @@ export default function OpenPlansPanel({
                   key={plan.id}
                   plan={plan}
                   selected={isSelected}
-                  linkedPlans={linkedPlans}
+                  associatedPlans={associatedPlans}
                   onSelect={() => onSelectPlan(plan)}
                   onClose={() => onClosePlan(plan.id)}
                   onOpenAssociation={onOpenAssociation}

@@ -7,30 +7,23 @@
  */
 
 /**
- * Tactical / mono font. Use for labels, banner text, status pills, button
- * labels, count chips, tree-row tactical names, and any element where the
- * military-readout aesthetic should read. Reach for it via
- * `sx={{ fontFamily: monoFont }}` — without that, components inherit `bodyFont`
- * from the MUI theme.
- */
-export const monoFont =
-  '"Chakra Petch", ui-monospace, "SFMono-Regular", Menlo, Consolas, monospace';
-
-/**
- * Default body font. Wired into the MUI theme's `typography.fontFamily`, so
- * everything that doesn't explicitly set `monoFont` falls back to this:
- * descriptions, paragraph text, input field values, regular Typography, etc.
+ * Default body font. Wired into the MUI theme's `typography.fontFamily`.
  */
 export const bodyFont =
   '"Inter", system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif';
 
 /**
- * Unified app chrome accent — a desaturated teal/green. Used by all panel
- * banners and as a subtle accent on selection rings, header decorations,
- * and small "ready" indicators. Keep category colors (categoryColor map) for
- * plan-specific identity; this is the surrounding-frame color.
+ * Label font. Aliased to `bodyFont` (Inter) so labels stay clean and readable;
+ * kept as a separate export so a future display font can be swapped in without
+ * touching every component that uses it.
  */
-export const appAccent = "#80cbc4";
+export const monoFont = bodyFont;
+
+/**
+ * Unified app chrome accent. Used by panel banners, header decorations, and
+ * small selection accents. Per-plan identity stays on category colors.
+ */
+export const appAccent = "#90caf9";
 
 export const tacticalSurface = {
   panel: "#181818",
@@ -61,15 +54,15 @@ export const selectionStyles = {
 
 export const monoLabelSx = {
   fontFamily: monoFont,
-  fontSize: 10.5,
-  letterSpacing: 1.5,
+  fontSize: 11,
+  letterSpacing: 0.5,
   fontWeight: 700,
   color: "text.secondary",
 } as const;
 
 export const monoValueSx = {
   fontFamily: monoFont,
-  fontSize: 12,
+  fontSize: 12.5,
   fontWeight: 600,
   color: "text.primary",
 } as const;

@@ -1,14 +1,22 @@
-import { Box, Button, IconButton, Stack, Typography } from "@mui/material";
+import { useState } from "react";
+import {
+  Box,
+  ButtonBase,
+  Collapse,
+  IconButton,
+  Stack,
+  Typography,
+} from "@mui/material";
 
 import ArticleIcon from "@mui/icons-material/Article";
-import ChangeHistoryIcon from "@mui/icons-material/ChangeHistory";
 import CloseIcon from "@mui/icons-material/Close";
+import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import FlagIcon from "@mui/icons-material/Flag";
-import GpsFixedIcon from "@mui/icons-material/GpsFixed";
+import HubIcon from "@mui/icons-material/Hub";
 import LayersIcon from "@mui/icons-material/Layers";
 
 import { categoryColor } from "../../../categoryColors";
-import { StatPill, monoFont, tacticalSurface } from "../../../theme";
+import { monoFont, tacticalSurface } from "../../../theme";
 import { formatMilitaryShort } from "../../../utils/formatting";
 import type { WeaponPlan } from "../../../types";
 import AssociationRow from "./AssociationRow";
@@ -18,7 +26,7 @@ const noop = () => {};
 type PlanCardProps = {
   plan: WeaponPlan;
   selected: boolean;
-  linkedPlans: WeaponPlan[];
+  associatedPlans: WeaponPlan[];
   onSelect: () => void;
   onClose: () => void;
   onOpenAssociation: (id: string) => void;
@@ -28,13 +36,14 @@ type PlanCardProps = {
 export default function PlanCard({
   plan,
   selected,
-  linkedPlans,
+  associatedPlans,
   onSelect,
   onClose,
   onOpenAssociation,
   onDisassociate,
 }: PlanCardProps) {
   const accent = categoryColor[plan.category];
+  const [associationsExpanded, setAssociationsExpanded] = useState(false);
   return (
     <Box
       onClick={onSelect}
@@ -104,9 +113,9 @@ export default function PlanCard({
               fontSize: 9.5,
               fontWeight: 700,
               letterSpacing: 1.4,
-              color: "#a5d6a7",
-              bgcolor: "rgba(165,214,167,0.12)",
-              border: "1px solid rgba(165,214,167,0.4)",
+              color: "#90caf9",
+              bgcolor: "rgba(144,202,249,0.12)",
+              border: "1px solid rgba(144,202,249,0.4)",
               flexShrink: 0,
             }}
           >
@@ -152,19 +161,6 @@ export default function PlanCard({
             {formatMilitaryShort(plan.modificationDate)}
           </Typography>
 
-          <Stack direction="row" spacing={0.85}>
-            <StatPill
-              icon={<ChangeHistoryIcon sx={{ fontSize: 14 }} />}
-              label="RELEASES"
-              count={plan.releases.length}
-            />
-            <StatPill
-              icon={<GpsFixedIcon sx={{ fontSize: 14 }} />}
-              label="TARGETS"
-              count={plan.targets.length}
-            />
-          </Stack>
-
           <Typography sx={{ color: "text.secondary", fontSize: 13.5, lineHeight: 1.55 }}>
             {plan.description}
           </Typography>
@@ -179,44 +175,133 @@ export default function PlanCard({
               }}
             >
               <Stack spacing={1.75}>
+                {associatedPlans.length > 0 && (
+                  <Stack spacing={associationsExpanded ? 1 : 0}>
+                    <Box
+                      onClick={() =>
+                        setAssociationsExpanded((open) => !open)
+                      }
+                      sx={{
+                        display: "flex",
+                        alignItems: "center",
+                        gap: 1.25,
+                        px: 1.25,
+                        py: 1,
+                        borderRadius: 0.5,
+                        bgcolor: "rgba(255,255,255,0.04)",
+                        border: "1px solid rgba(255,255,255,0.12)",
+                        cursor: "pointer",
+                        userSelect: "none",
+                        transition:
+                          "background-color 140ms ease, border-color 140ms ease",
+                        "&:hover": {
+                          bgcolor: "rgba(255,255,255,0.08)",
+                          borderColor: "rgba(255,255,255,0.22)",
+                        },
+                      }}
+                    >
+                      <Box
+                        sx={{
+                          width: 32,
+                          height: 32,
+                          borderRadius: 0.5,
+                          display: "grid",
+                          placeItems: "center",
+                          flexShrink: 0,
+                          bgcolor: "rgba(255,255,255,0.05)",
+                          border: "1px solid rgba(255,255,255,0.12)",
+                          color: "text.secondary",
+                        }}
+                      >
+                        <HubIcon sx={{ fontSize: 17 }} />
+                      </Box>
+                      <Box sx={{ minWidth: 0, flex: 1 }}>
+                        <Typography
+                          sx={{
+                            fontFamily: monoFont,
+                            fontSize: 11,
+                            fontWeight: 700,
+                            letterSpacing: 1.3,
+                            textTransform: "uppercase",
+                            color: "text.primary",
+                            lineHeight: 1.2,
+                          }}
+                        >
+                          Associated Plans
+                        </Typography>
+                        <Typography
+                          sx={{
+                            fontSize: 11.5,
+                            color: "text.secondary",
+                            mt: 0.25,
+                            lineHeight: 1.2,
+                          }}
+                        >
+                          {associatedPlans.length}{" "}
+                          {associatedPlans.length === 1 ? "plan" : "plans"}
+                          {associatedPlans.some((p) => p.isOpen) &&
+                            ` · ${
+                              associatedPlans.filter((p) => p.isOpen).length
+                            } open`}
+                        </Typography>
+                      </Box>
+                      <ExpandMoreIcon
+                        sx={{
+                          fontSize: 19,
+                          color: "text.secondary",
+                          flexShrink: 0,
+                          transform: associationsExpanded
+                            ? "rotate(0deg)"
+                            : "rotate(-90deg)",
+                          transition: "transform 160ms ease",
+                        }}
+                      />
+                    </Box>
+                    <Collapse in={associationsExpanded} unmountOnExit>
+                      <Stack spacing={0.75}>
+                        {associatedPlans.map((associated) => (
+                          <AssociationRow
+                            key={associated.id}
+                            name={associated.name}
+                            isOpen={associated.isOpen}
+                            accent={categoryColor[associated.category]}
+                            onOpen={() => onOpenAssociation(associated.id)}
+                            onDisassociate={() =>
+                              onDisassociate(plan.id, associated.id)
+                            }
+                          />
+                        ))}
+                      </Stack>
+                    </Collapse>
+                  </Stack>
+                )}
+
                 <Stack spacing={1}>
                   <SectionLabel>ACTIONS</SectionLabel>
-                  <Stack spacing={0.75}>
-                    <ActionButton
-                      icon={<FlagIcon sx={{ fontSize: 14 }} />}
+                  <Box
+                    sx={{
+                      display: "grid",
+                      gridTemplateColumns: "repeat(3, 1fr)",
+                      gap: 0.75,
+                    }}
+                  >
+                    <ActionTile
+                      icon={<FlagIcon />}
                       label="Associate Mission"
                       onClick={noop}
                     />
-                    <ActionButton
-                      icon={<LayersIcon sx={{ fontSize: 14 }} />}
+                    <ActionTile
+                      icon={<LayersIcon />}
                       label="Associate Shape Collection"
                       onClick={noop}
                     />
-                    <ActionButton
-                      icon={<ArticleIcon sx={{ fontSize: 14 }} />}
+                    <ActionTile
+                      icon={<ArticleIcon />}
                       label="Associate Plan"
                       onClick={noop}
                     />
-                  </Stack>
+                  </Box>
                 </Stack>
-
-                {linkedPlans.length > 0 && (
-                  <Stack spacing={1}>
-                    <SectionLabel>LINKED PLANS · {linkedPlans.length}</SectionLabel>
-                    <Stack spacing={0.75}>
-                      {linkedPlans.map((linked) => (
-                        <AssociationRow
-                          key={linked.id}
-                          name={linked.name}
-                          isOpen={linked.isOpen}
-                          accent={categoryColor[linked.category]}
-                          onOpen={() => onOpenAssociation(linked.id)}
-                          onUnlink={() => onDisassociate(plan.id, linked.id)}
-                        />
-                      ))}
-                    </Stack>
-                  </Stack>
-                )}
               </Stack>
             </Box>
           )}
@@ -242,7 +327,7 @@ function SectionLabel({ children }: { children: React.ReactNode }) {
   );
 }
 
-function ActionButton({
+function ActionTile({
   icon,
   label,
   onClick,
@@ -252,29 +337,24 @@ function ActionButton({
   onClick: () => void;
 }) {
   return (
-    <Button
-      startIcon={icon}
+    <ButtonBase
       onClick={onClick}
-      fullWidth
       sx={{
-        height: 34,
-        justifyContent: "flex-start",
-        px: 1.25,
+        display: "flex",
+        flexDirection: "column",
+        alignItems: "center",
+        justifyContent: "center",
+        gap: 0.65,
+        px: 0.5,
+        py: 1.1,
+        minHeight: 72,
         borderRadius: 0.5,
-        fontFamily: monoFont,
-        fontSize: 11,
-        fontWeight: 700,
-        letterSpacing: 1.3,
-        textTransform: "uppercase",
-        color: "text.secondary",
         bgcolor: "rgba(255,255,255,0.04)",
         border: "1px solid rgba(255,255,255,0.1)",
+        color: "text.secondary",
         transition:
           "background-color 140ms ease, border-color 160ms ease, color 140ms ease",
-        "& .MuiButton-startIcon": {
-          mr: 1.1,
-          marginLeft: 0,
-        },
+        "& > svg": { fontSize: 18 },
         "&:hover": {
           color: "text.primary",
           bgcolor: "rgba(255,255,255,0.08)",
@@ -282,8 +362,22 @@ function ActionButton({
         },
       }}
     >
-      {label}
-    </Button>
+      {icon}
+      <Typography
+        sx={{
+          fontFamily: monoFont,
+          fontSize: 9.5,
+          fontWeight: 700,
+          letterSpacing: 0.6,
+          textTransform: "uppercase",
+          textAlign: "center",
+          lineHeight: 1.25,
+          color: "inherit",
+        }}
+      >
+        {label}
+      </Typography>
+    </ButtonBase>
   );
 }
 

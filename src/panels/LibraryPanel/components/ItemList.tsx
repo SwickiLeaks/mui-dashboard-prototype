@@ -1,11 +1,7 @@
 import { Box, Stack, Typography } from "@mui/material";
 
-import ChangeHistoryIcon from "@mui/icons-material/ChangeHistory";
-import GpsFixedIcon from "@mui/icons-material/GpsFixed";
-
 import { categoryColor } from "../../../categoryColors";
 import {
-  StatPill,
   monoFont,
   scrollbarTacticalSx,
   tacticalSurface,
@@ -143,15 +139,15 @@ export default function ItemList({
                   fontSize: 10,
                   letterSpacing: 1.3,
                   fontWeight: 700,
-                  color: plan.isOpen ? "#a5d6a7" : "text.secondary",
+                  color: plan.isOpen ? "#90caf9" : "text.secondary",
                   px: 0.75,
                   py: 0.2,
                   border: `1px solid ${
-                    plan.isOpen ? "#a5d6a755" : "rgba(255,255,255,0.1)"
+                    plan.isOpen ? "#90caf955" : "rgba(255,255,255,0.1)"
                   }`,
                   borderRadius: 0.5,
                   bgcolor: plan.isOpen
-                    ? "rgba(165,214,167,0.08)"
+                    ? "rgba(144,202,249,0.08)"
                     : "transparent",
                   flexShrink: 0,
                 }}
@@ -174,18 +170,6 @@ export default function ItemList({
                   DRAFTED BY {plan.createdBy.toUpperCase()} ·{" "}
                   {formatMilitaryShort(plan.modificationDate)}
                 </Typography>
-                <Stack direction="row" spacing={0.85}>
-                  <StatPill
-                    icon={<ChangeHistoryIcon sx={{ fontSize: 14 }} />}
-                    label="RELEASES"
-                    count={plan.releases.length}
-                  />
-                  <StatPill
-                    icon={<GpsFixedIcon sx={{ fontSize: 14 }} />}
-                    label="TARGETS"
-                    count={plan.targets.length}
-                  />
-                </Stack>
                 <Typography
                   sx={{
                     fontSize: 13,

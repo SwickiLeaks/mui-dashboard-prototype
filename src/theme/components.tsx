@@ -27,20 +27,11 @@ export function ClassificationBanner({
         px: 2.25,
         py: 1.5,
         bgcolor: tacticalSurface.banner,
-        borderBottom: `2px solid ${accent}`,
+        borderBottom: `1px solid ${tacticalSurface.borderHover}`,
         overflow: "hidden",
         flexShrink: 0,
       }}
     >
-      <Box
-        sx={{
-          position: "absolute",
-          inset: 0,
-          opacity: 0.06,
-          background: `repeating-linear-gradient(135deg, ${accent} 0 1px, transparent 1px 7px)`,
-          pointerEvents: "none",
-        }}
-      />
       <Stack
         direction="row"
         justifyContent="space-between"
@@ -87,7 +78,7 @@ export function ClassificationBanner({
                   fontSize: 11,
                   letterSpacing: 1.8,
                   fontWeight: 700,
-                  color: statusActive ? "#a5d6a7" : "text.secondary",
+                  color: statusActive ? "#90caf9" : "text.secondary",
                   whiteSpace: "nowrap",
                 }}
               >

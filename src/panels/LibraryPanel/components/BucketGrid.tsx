@@ -33,6 +33,7 @@ export default function BucketGrid({ counts, onSelect }: BucketGridProps) {
             onClick={() => onSelect(bucket.key)}
             sx={{
               ...cardOuterSx,
+              p: 1.5,
               "&:hover": {
                 borderColor: LIBRARY_ACCENT,
                 bgcolor: tacticalSurface.cardHover,
@@ -44,79 +45,59 @@ export default function BucketGrid({ counts, onSelect }: BucketGridProps) {
               },
             }}
           >
-            <Box
-              sx={{
-                display: "flex",
-                alignItems: "center",
-                gap: 1,
-                px: 1.5,
-                py: 0.95,
-                bgcolor: tacticalSurface.cardHeader,
-                borderBottom: `1px solid ${tacticalSurface.hairline}`,
-              }}
-            >
+            <Stack direction="row" spacing={1.5} alignItems="center">
               <Box
                 sx={{
-                  width: 3,
-                  height: 14,
-                  bgcolor: LIBRARY_ACCENT,
+                  width: 38,
+                  height: 38,
+                  borderRadius: 0.5,
+                  display: "grid",
+                  placeItems: "center",
+                  bgcolor: `${LIBRARY_ACCENT}1a`,
+                  color: LIBRARY_ACCENT,
+                  border: `1px solid ${LIBRARY_ACCENT}40`,
+                  flexShrink: 0,
+                }}
+              >
+                {bucket.icon}
+              </Box>
+
+              <Box sx={{ minWidth: 0, flex: 1 }}>
+                <Typography
+                  sx={{
+                    fontFamily: monoFont,
+                    fontSize: 13,
+                    fontWeight: 700,
+                    letterSpacing: 0.8,
+                    color: "text.primary",
+                  }}
+                >
+                  {bucket.label.toUpperCase()}
+                </Typography>
+                <Typography
+                  sx={{
+                    fontSize: 12.5,
+                    color: "text.secondary",
+                    lineHeight: 1.4,
+                    mt: 0.25,
+                  }}
+                >
+                  {bucket.description}
+                </Typography>
+              </Box>
+
+              <CountChip count={count} accent={LIBRARY_ACCENT} />
+
+              <ChevronRightIcon
+                className="bucket-chevron"
+                sx={{
+                  fontSize: 19,
+                  color: "rgba(255,255,255,0.3)",
+                  transition: "transform 140ms ease, color 140ms ease",
                   flexShrink: 0,
                 }}
               />
-              <Typography
-                sx={{
-                  fontFamily: monoFont,
-                  fontSize: 10.5,
-                  letterSpacing: 1.5,
-                  fontWeight: 700,
-                  color: "text.secondary",
-                  flex: 1,
-                }}
-              >
-                {bucket.label.toUpperCase()}
-              </Typography>
-              <CountChip count={count} accent={LIBRARY_ACCENT} />
-            </Box>
-
-            <Box sx={{ p: 1.75 }}>
-              <Stack direction="row" spacing={1.5} alignItems="center">
-                <Box
-                  sx={{
-                    width: 40,
-                    height: 40,
-                    borderRadius: 0.5,
-                    display: "grid",
-                    placeItems: "center",
-                    bgcolor: `${LIBRARY_ACCENT}1a`,
-                    color: LIBRARY_ACCENT,
-                    border: `1px solid ${LIBRARY_ACCENT}40`,
-                    flexShrink: 0,
-                  }}
-                >
-                  {bucket.icon}
-                </Box>
-                <Box sx={{ minWidth: 0, flex: 1 }}>
-                  <Typography
-                    sx={{
-                      fontSize: 13.5,
-                      color: "text.secondary",
-                      lineHeight: 1.45,
-                    }}
-                  >
-                    {bucket.description}
-                  </Typography>
-                </Box>
-                <ChevronRightIcon
-                  className="bucket-chevron"
-                  sx={{
-                    fontSize: 19,
-                    color: "rgba(255,255,255,0.3)",
-                    transition: "transform 140ms ease, color 140ms ease",
-                    flexShrink: 0,
-                  }}
-                />
-              </Stack>
-            </Box>
+            </Stack>
           </Box>
         );
       })}

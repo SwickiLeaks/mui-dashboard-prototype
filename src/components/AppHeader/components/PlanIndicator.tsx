@@ -7,7 +7,7 @@ type PlanIndicatorProps = {
   plan: WeaponPlan | null;
 };
 
-/** Center-of-header status: green dot + plan name (or "NO PLAN SELECTED"). */
+/** Center-of-header status: accent dot + plan name (or "NO PLAN SELECTED"). */
 export default function PlanIndicator({ plan }: PlanIndicatorProps) {
   return (
     <Box
@@ -29,8 +29,8 @@ export default function PlanIndicator({ plan }: PlanIndicatorProps) {
           height: 7,
           borderRadius: "50%",
           flexShrink: 0,
-          bgcolor: plan ? "#a5d6a7" : "rgba(255,255,255,0.2)",
-          boxShadow: plan ? "0 0 8px #a5d6a7cc" : "none",
+          bgcolor: plan ? "#90caf9" : "rgba(255,255,255,0.2)",
+          boxShadow: plan ? "0 0 8px #90caf9cc" : "none",
         }}
       />
       <Typography
