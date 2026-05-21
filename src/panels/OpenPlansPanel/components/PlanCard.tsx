@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import {
   Box,
   ButtonBase,
@@ -44,6 +44,10 @@ export default function PlanCard({
 }: PlanCardProps) {
   const accent = categoryColor[plan.category];
   const [associationsExpanded, setAssociationsExpanded] = useState(false);
+
+  useEffect(() => {
+    if (!selected) setAssociationsExpanded(false);
+  }, [selected]);
   return (
     <Box
       onClick={onSelect}
