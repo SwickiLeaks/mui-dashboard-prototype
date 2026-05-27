@@ -4,18 +4,21 @@ import { selectionStyles } from "../../../theme";
 
 type PrimaryIconButtonProps = {
   active?: boolean;
+  title?: string;
   onClick?: React.MouseEventHandler<HTMLButtonElement>;
   children: React.ReactNode;
 };
 
 export default function PrimaryIconButton({
   active = false,
+  title,
   onClick,
   children,
 }: PrimaryIconButtonProps) {
   return (
     <IconButton
       onClick={onClick}
+      title={title}
       disableFocusRipple
       sx={{
         flexShrink: 0,

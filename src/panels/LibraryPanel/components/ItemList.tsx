@@ -1,7 +1,10 @@
 import { Box, Stack, Typography } from "@mui/material";
 
-import { categoryColor } from "../../../categoryColors";
+import CheckCircleIcon from "@mui/icons-material/CheckCircle";
+import CircleOutlinedIcon from "@mui/icons-material/CircleOutlined";
+
 import {
+  appAccent,
   monoFont,
   scrollbarTacticalSx,
   tacticalSurface,
@@ -15,7 +18,6 @@ type ItemListProps = {
   plans: WeaponPlan[];
   filter: PlanFilter;
   pendingPlanIds: string[];
-  accent: string;
   onToggle: (id: string) => void;
 };
 
@@ -23,7 +25,6 @@ export default function ItemList({
   plans,
   filter,
   pendingPlanIds,
-  accent,
   onToggle,
 }: ItemListProps) {
   if (plans.length === 0) {
@@ -40,13 +41,13 @@ export default function ItemList({
           <Typography
             sx={{
               fontFamily: monoFont,
-              fontSize: 11,
-              letterSpacing: 1.4,
-              color: "text.secondary",
+              fontSize: 14,
+              fontWeight: 700,
+              color: "text.primary",
             }}
           >
-            NO {filter === "open" ? "OPEN " : filter === "closed" ? "CLOSED " : ""}
-            PLANS
+            No {filter === "open" ? "open " : filter === "closed" ? "closed " : ""}
+            plans
           </Typography>
           <Typography
             sx={{
@@ -78,97 +79,89 @@ export default function ItemList({
     >
       {plans.map((plan) => {
         const selected = pendingPlanIds.includes(plan.id);
-        const cardAccent = categoryColor[plan.category];
         return (
           <Box
             key={plan.id}
             onClick={() => onToggle(plan.id)}
             sx={{
               ...cardOuterSx,
-              borderColor: selected ? accent : tacticalSurface.border,
+              borderColor: selected ? appAccent : tacticalSurface.border,
               bgcolor: selected
-                ? tacticalSurface.cardSelected
+                ? `${appAccent}14`
                 : tacticalSurface.card,
               boxShadow: selected
-                ? `0 0 0 1px ${accent}55, 0 6px 18px rgba(0,0,0,0.35)`
+                ? `0 0 0 1px ${appAccent}66`
                 : "none",
               "&:hover": {
                 bgcolor: selected
-                  ? tacticalSurface.cardSelected
+                  ? `${appAccent}1f`
                   : tacticalSurface.cardHover,
-                borderColor: selected ? accent : tacticalSurface.borderHover,
+                borderColor: selected ? appAccent : tacticalSurface.borderHover,
               },
             }}
           >
-            <Box
-              sx={{
-                display: "flex",
-                alignItems: "center",
-                gap: 1,
-                px: 1.5,
-                py: 1,
-                bgcolor: tacticalSurface.cardHeader,
-                borderBottom: `1px solid ${tacticalSurface.hairline}`,
-              }}
-            >
-              <Box
-                sx={{
-                  width: 3,
-                  height: 14,
-                  bgcolor: cardAccent,
-                  flexShrink: 0,
-                }}
-              />
-              <Typography
-                sx={{
-                  fontFamily: monoFont,
-                  fontSize: 11.5,
-                  letterSpacing: 1.2,
-                  fontWeight: 700,
-                  color: "text.primary",
-                  minWidth: 0,
-                  flex: 1,
-                }}
-                noWrap
-              >
-                {plan.name.toUpperCase()}
-              </Typography>
-              <Typography
-                sx={{
-                  fontFamily: monoFont,
-                  fontSize: 10,
-                  letterSpacing: 1.3,
-                  fontWeight: 700,
-                  color: plan.isOpen ? "#90caf9" : "text.secondary",
-                  px: 0.75,
-                  py: 0.2,
-                  border: `1px solid ${
-                    plan.isOpen ? "#90caf955" : "rgba(255,255,255,0.1)"
-                  }`,
-                  borderRadius: 0.5,
-                  bgcolor: plan.isOpen
-                    ? "rgba(144,202,249,0.08)"
-                    : "transparent",
-                  flexShrink: 0,
-                }}
-              >
-                {plan.isOpen ? "OPEN" : "CLOSED"}
-              </Typography>
-            </Box>
-
             <Box sx={{ p: 1.75 }}>
               <Stack spacing={1.25}>
+                <Stack direction="row" alignItems="center" gap={1.25}>
+                  <Box
+                    sx={{
+                      display: "inline-flex",
+                      color: selected ? appAccent : "rgba(255,255,255,0.35)",
+                      flexShrink: 0,
+                      transition: "color 140ms ease",
+                    }}
+                  >
+                    {selected ? (
+                      <CheckCircleIcon sx={{ fontSize: 20 }} />
+                    ) : (
+                      <CircleOutlinedIcon sx={{ fontSize: 20 }} />
+                    )}
+                  </Box>
+                  <Typography
+                    sx={{
+                      fontFamily: monoFont,
+                      fontSize: 17,
+                      letterSpacing: 0,
+                      fontWeight: 700,
+                      color: "text.primary",
+                      minWidth: 0,
+                      flex: 1,
+                      lineHeight: 1.25,
+                    }}
+                    noWrap
+                  >
+                    {plan.name}
+                  </Typography>
+                  {plan.isOpen && (
+                    <Typography
+                      sx={{
+                        fontFamily: monoFont,
+                        fontSize: 11,
+                        letterSpacing: 0.1,
+                        fontWeight: 600,
+                        color: "#90caf9",
+                        px: 0.85,
+                        py: 0.25,
+                        border: "1px solid rgba(144,202,249,0.4)",
+                        borderRadius: 0.5,
+                        bgcolor: "rgba(144,202,249,0.12)",
+                        flexShrink: 0,
+                      }}
+                    >
+                      Open
+                    </Typography>
+                  )}
+                </Stack>
                 <Typography
                   sx={{
                     fontFamily: monoFont,
-                    fontSize: 10.5,
-                    letterSpacing: 1.2,
-                    fontWeight: 700,
+                    fontSize: 12,
+                    letterSpacing: 0.1,
+                    fontWeight: 500,
                     color: "text.secondary",
                   }}
                 >
-                  DRAFTED BY {plan.createdBy.toUpperCase()} ·{" "}
-                  {formatMilitaryShort(plan.modificationDate)}
+                  Drafted by {plan.createdBy} · {formatMilitaryShort(plan.modificationDate)}
                 </Typography>
                 <Typography
                   sx={{

@@ -130,13 +130,13 @@ export default function FooterBar({
               bgcolor: accent,
               color: "#0f0f0f",
               borderRadius: 0.5,
-              boxShadow: `0 0 0 1px ${accent}99 inset, 0 4px 14px ${accent}26`,
+              boxShadow: `0 0 0 1px ${accent}99 inset`,
               transition:
                 "background-color 160ms ease, box-shadow 160ms ease, filter 160ms ease",
               "&:hover": {
                 bgcolor: accent,
                 filter: "brightness(1.1)",
-                boxShadow: `0 0 0 1px ${accent} inset, 0 6px 18px ${accent}40`,
+                boxShadow: `0 0 0 1px ${accent} inset`,
               },
               "&:disabled": {
                 bgcolor: "rgba(255,255,255,0.05)",

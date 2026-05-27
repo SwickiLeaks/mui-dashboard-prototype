@@ -80,13 +80,13 @@ export default function AppSwitcherMenu({
         <Typography
           sx={{
             fontFamily: monoFont,
-            fontSize: 10.5,
-            letterSpacing: 1.5,
+            fontSize: 12.5,
+            letterSpacing: 0.2,
             fontWeight: 700,
             color: "text.secondary",
           }}
         >
-          APPLICATIONS
+          Applications
         </Typography>
       </Box>
 
@@ -151,12 +151,11 @@ export default function AppSwitcherMenu({
             <Typography
               sx={{
                 fontFamily: monoFont,
-                fontSize: 9.5,
-                letterSpacing: 1.1,
-                fontWeight: 700,
-                textTransform: "uppercase",
+                fontSize: 11,
+                letterSpacing: 0.2,
+                fontWeight: 600,
                 textAlign: "center",
-                lineHeight: 1.2,
+                lineHeight: 1.25,
               }}
             >
               {app.label}

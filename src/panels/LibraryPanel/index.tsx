@@ -14,7 +14,6 @@ import FilterButton from "./components/FilterButton";
 import FooterBar from "./components/FooterBar";
 import ItemList from "./components/ItemList";
 import { buckets, categories } from "./data";
-import { LIBRARY_ACCENT } from "./styles";
 import type { LibraryPath, PlanFilter } from "./types";
 import { getView, scopeForPath } from "./utils";
 
@@ -150,7 +149,7 @@ export default function LibraryPanel({
         sx={{
           px: 2,
           py: 1.25,
-          bgcolor: "#1a1a1a",
+          bgcolor: "transparent",
           borderBottom: `1px solid ${tacticalSurface.hairline}`,
           flexShrink: 0,
           display: "flex",
@@ -175,29 +174,26 @@ export default function LibraryPanel({
           }}
         >
           <BreadcrumbSegment
-            label="LIBRARY"
+            label="Library"
             isCurrent={view === "root"}
             onClick={view === "root" ? undefined : goRoot}
           />
           {path.bucket && bucketMeta && (
             <BreadcrumbSegment
-              label={bucketMeta.label.toUpperCase()}
+              label={bucketMeta.label}
               isCurrent={bucketIsCurrent}
               onClick={bucketIsCurrent ? undefined : goBucket}
             />
           )}
           {path.crew && (
             <BreadcrumbSegment
-              label={path.crew.toUpperCase()}
+              label={path.crew}
               isCurrent={view === "categories"}
               onClick={view === "categories" ? undefined : goCrew}
             />
           )}
           {path.category && categoryMeta && (
-            <BreadcrumbSegment
-              label={categoryMeta.label.toUpperCase()}
-              isCurrent
-            />
+            <BreadcrumbSegment label={categoryMeta.label} isCurrent />
           )}
         </Breadcrumbs>
 
@@ -244,7 +240,6 @@ export default function LibraryPanel({
             plans={items}
             filter={filter}
             pendingPlanIds={pendingPlanIds}
-            accent={LIBRARY_ACCENT}
             onToggle={togglePlan}
           />
         )}

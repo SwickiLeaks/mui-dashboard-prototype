@@ -23,29 +23,19 @@ export default function PlanIndicator({ plan }: PlanIndicatorProps) {
         gap: 1,
       }}
     >
-      <Box
-        sx={{
-          width: 7,
-          height: 7,
-          borderRadius: "50%",
-          flexShrink: 0,
-          bgcolor: plan ? "#90caf9" : "rgba(255,255,255,0.2)",
-          boxShadow: plan ? "0 0 8px #90caf9cc" : "none",
-        }}
-      />
       <Typography
         sx={{
           fontFamily: monoFont,
-          fontWeight: 700,
-          fontSize: 13,
-          letterSpacing: 1.6,
+          fontWeight: 600,
+          fontSize: 14,
+          letterSpacing: 0.2,
           color: plan ? "text.primary" : "text.secondary",
           overflow: "hidden",
           textOverflow: "ellipsis",
           whiteSpace: "nowrap",
         }}
       >
-        {(plan?.name ?? "NO PLAN SELECTED").toUpperCase()}
+        {plan?.name ?? "No plan selected"}
       </Typography>
     </Box>
   );

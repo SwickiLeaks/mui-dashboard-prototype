@@ -43,15 +43,14 @@ const editors: ToolEntry[] = [
 
 const toolButtonSx = {
   justifyContent: "flex-start",
-  textTransform: "uppercase",
   fontFamily: monoFont,
-  fontSize: 11.5,
-  letterSpacing: 1.3,
-  fontWeight: 700,
+  fontSize: 13,
+  letterSpacing: 0.2,
+  fontWeight: 600,
   color: "text.secondary",
   borderRadius: 0.5,
   px: 1,
-  py: 0.5,
+  py: 0.7,
   border: "1px solid transparent",
   "& .MuiButton-startIcon": { mr: 0.85, ml: 0 },
   "&:hover": {
@@ -80,7 +79,7 @@ export default function ToolsPanel({ onClose }: ToolsPanelProps) {
           ...scrollbarTacticalSx,
         }}
       >
-        <TacticalSection label="EDITORS" accent={ACCENT}>
+        <TacticalSection label="Editors" accent={ACCENT}>
           <Stack spacing={0.4}>
             {editors.map((tool) => (
               <Button

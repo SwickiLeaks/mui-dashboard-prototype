@@ -39,16 +39,6 @@ export function ClassificationBanner({
         sx={{ position: "relative", minHeight: 30 }}
       >
         <Stack direction="row" spacing={1} alignItems="center" sx={{ minWidth: 0 }}>
-          <Box
-            sx={{
-              width: 8,
-              height: 8,
-              borderRadius: "50%",
-              bgcolor: accent,
-              boxShadow: `0 0 10px ${accent}cc`,
-              flexShrink: 0,
-            }}
-          />
           <Typography
             sx={{
               fontFamily: monoFont,
@@ -153,8 +143,8 @@ export function TacticalSection({
         <Typography
           sx={{
             fontFamily: monoFont,
-            fontSize: 10.5,
-            letterSpacing: 1.5,
+            fontSize: 12.5,
+            letterSpacing: 0.2,
             fontWeight: 700,
             color: "text.secondary",
           }}

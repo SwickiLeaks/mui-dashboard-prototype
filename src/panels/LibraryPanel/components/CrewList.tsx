@@ -27,12 +27,12 @@ export default function CrewList({ crewMembers, onSelect }: CrewListProps) {
           <Typography
             sx={{
               fontFamily: monoFont,
-              fontSize: 11,
-              letterSpacing: 1.4,
+              fontSize: 13,
+              letterSpacing: 0.2,
               color: "text.secondary",
             }}
           >
-            NO CREW FOLDERS
+            No crew folders
           </Typography>
         </Box>
       </Box>
@@ -89,30 +89,19 @@ export default function CrewList({ crewMembers, onSelect }: CrewListProps) {
                 {initials(name)}
               </Box>
 
-              <Box sx={{ minWidth: 0, flex: 1 }}>
-                <Typography
-                  sx={{
-                    fontFamily: monoFont,
-                    fontSize: 13,
-                    fontWeight: 700,
-                    letterSpacing: 1,
-                    color: "text.primary",
-                  }}
-                >
-                  {name.toUpperCase()}
-                </Typography>
-                <Typography
-                  sx={{
-                    fontFamily: monoFont,
-                    fontSize: 10.5,
-                    letterSpacing: 1.2,
-                    color: "text.secondary",
-                    mt: 0.15,
-                  }}
-                >
-                  {count} {count === 1 ? "PLAN" : "PLANS"}
-                </Typography>
-              </Box>
+              <Typography
+                sx={{
+                  fontFamily: monoFont,
+                  fontSize: 14,
+                  fontWeight: 700,
+                  letterSpacing: 0.2,
+                  color: "text.primary",
+                  minWidth: 0,
+                  flex: 1,
+                }}
+              >
+                {name}
+              </Typography>
 
               <CountChip count={count} accent={LIBRARY_ACCENT} />
               <ChevronRightIcon

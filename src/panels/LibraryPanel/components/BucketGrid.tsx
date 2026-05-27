@@ -37,7 +37,7 @@ export default function BucketGrid({ counts, onSelect }: BucketGridProps) {
               "&:hover": {
                 borderColor: LIBRARY_ACCENT,
                 bgcolor: tacticalSurface.cardHover,
-                boxShadow: `0 0 0 1px ${LIBRARY_ACCENT}33, 0 8px 22px ${LIBRARY_ACCENT}1a`,
+                boxShadow: `0 0 0 1px ${LIBRARY_ACCENT}33`,
               },
               "&:hover .bucket-chevron": {
                 transform: "translateX(3px)",
@@ -66,13 +66,13 @@ export default function BucketGrid({ counts, onSelect }: BucketGridProps) {
                 <Typography
                   sx={{
                     fontFamily: monoFont,
-                    fontSize: 13,
+                    fontSize: 14,
                     fontWeight: 700,
-                    letterSpacing: 0.8,
+                    letterSpacing: 0.2,
                     color: "text.primary",
                   }}
                 >
-                  {bucket.label.toUpperCase()}
+                  {bucket.label}
                 </Typography>
                 <Typography
                   sx={{

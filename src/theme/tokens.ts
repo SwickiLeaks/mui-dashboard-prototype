@@ -10,12 +10,12 @@
  * Default body font. Wired into the MUI theme's `typography.fontFamily`.
  */
 export const bodyFont =
-  '"Inter", system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif';
+  '"Roboto", system-ui, -apple-system, "Segoe UI", Arial, sans-serif';
 
 /**
- * Label font. Aliased to `bodyFont` (Inter) so labels stay clean and readable;
- * kept as a separate export so a future display font can be swapped in without
- * touching every component that uses it.
+ * Label font. Aliased to `bodyFont` so labels stay clean and readable; kept as
+ * a separate export so a future display font can be swapped in without touching
+ * every component that uses it.
  */
 export const monoFont = bodyFont;
 
@@ -26,15 +26,15 @@ export const monoFont = bodyFont;
 export const appAccent = "#90caf9";
 
 export const tacticalSurface = {
-  panel: "#181818",
-  card: "#222222",
-  cardHover: "#272727",
-  cardSelected: "#2a2a2a",
-  cardHeader: "#1a1a1a",
-  banner: "#0f0f0f",
-  border: "rgba(255,255,255,0.07)",
-  borderHover: "rgba(255,255,255,0.18)",
-  borderStrong: "rgba(255,255,255,0.28)",
+  panel: "#262626",
+  card: "#2d2d2d",
+  cardHover: "#323232",
+  cardSelected: "#1a1a1a",
+  cardHeader: "#1f1f1f",
+  banner: "#1c1c1c",
+  border: "rgba(255,255,255,0.08)",
+  borderHover: "rgba(255,255,255,0.2)",
+  borderStrong: "rgba(255,255,255,0.32)",
   hairline: "rgba(255,255,255,0.06)",
 };
 

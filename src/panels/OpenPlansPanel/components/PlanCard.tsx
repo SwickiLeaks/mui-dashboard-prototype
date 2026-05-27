@@ -12,7 +12,7 @@ import ArticleIcon from "@mui/icons-material/Article";
 import CloseIcon from "@mui/icons-material/Close";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import FlagIcon from "@mui/icons-material/Flag";
-import HubIcon from "@mui/icons-material/Hub";
+import LinkIcon from "@mui/icons-material/Link";
 import LayersIcon from "@mui/icons-material/Layers";
 
 import { categoryColor } from "../../../categoryColors";
@@ -42,7 +42,6 @@ export default function PlanCard({
   onOpenAssociation,
   onDisassociate,
 }: PlanCardProps) {
-  const accent = categoryColor[plan.category];
   const [associationsExpanded, setAssociationsExpanded] = useState(false);
 
   useEffect(() => {
@@ -59,7 +58,7 @@ export default function PlanCard({
         }`,
         borderRadius: 0.5,
         boxShadow: selected
-          ? "0 0 0 1px rgba(255,255,255,0.18), 0 8px 22px rgba(0,0,0,0.45)"
+          ? "inset 0 1px 4px rgba(0,0,0,0.5)"
           : "none",
         overflow: "hidden",
         transition:
@@ -74,95 +73,76 @@ export default function PlanCard({
         },
       }}
     >
-      <Box
-        sx={{
-          display: "flex",
-          alignItems: "center",
-          gap: 1,
-          px: 1.5,
-          py: 0.85,
-          bgcolor: tacticalSurface.cardHeader,
-          borderBottom: `1px solid ${tacticalSurface.hairline}`,
-        }}
-      >
-        <Box
-          sx={{
-            width: 3,
-            height: 14,
-            bgcolor: accent,
-            flexShrink: 0,
-          }}
-        />
-        <Typography
-          sx={{
-            fontFamily: monoFont,
-            fontSize: 11.5,
-            letterSpacing: 1.2,
-            fontWeight: 700,
-            color: "text.primary",
-            minWidth: 0,
-            flex: 1,
-          }}
-          noWrap
-        >
-          {plan.name.toUpperCase()}
-        </Typography>
-        {selected && (
-          <Box
-            sx={{
-              px: 0.85,
-              py: 0.25,
-              borderRadius: 0.5,
-              fontFamily: monoFont,
-              fontSize: 9.5,
-              fontWeight: 700,
-              letterSpacing: 1.4,
-              color: "#90caf9",
-              bgcolor: "rgba(144,202,249,0.12)",
-              border: "1px solid rgba(144,202,249,0.4)",
-              flexShrink: 0,
-            }}
-          >
-            ACTIVE
-          </Box>
-        )}
-        <IconButton
-          size="small"
-          title="Close plan"
-          onClick={(event) => {
-            event.stopPropagation();
-            onClose();
-          }}
-          sx={{
-            width: 24,
-            height: 24,
-            borderRadius: 0.5,
-            color: "text.secondary",
-            flexShrink: 0,
-            transition: "color 140ms ease, background-color 140ms ease",
-            "&:hover": {
-              color: "#ff8a8a",
-              bgcolor: "rgba(255,120,120,0.12)",
-            },
-          }}
-        >
-          <CloseIcon sx={{ fontSize: 14 }} />
-        </IconButton>
-      </Box>
-
       <Box sx={{ p: 1.75 }}>
         <Stack spacing={1.25}>
+          <Stack direction="row" alignItems="center" gap={1}>
+            <Typography
+              sx={{
+                fontFamily: monoFont,
+                fontSize: 17,
+                letterSpacing: 0,
+                fontWeight: 700,
+                color: "text.primary",
+                minWidth: 0,
+                flex: 1,
+                lineHeight: 1.25,
+              }}
+              noWrap
+            >
+              {plan.name}
+            </Typography>
+            {selected && (
+              <Box
+                sx={{
+                  px: 0.85,
+                  py: 0.25,
+                  borderRadius: 0.5,
+                  fontFamily: monoFont,
+                  fontSize: 11,
+                  fontWeight: 600,
+                  letterSpacing: 0.1,
+                  color: "#90caf9",
+                  bgcolor: "rgba(144,202,249,0.12)",
+                  border: "1px solid rgba(144,202,249,0.4)",
+                  flexShrink: 0,
+                }}
+              >
+                Active
+              </Box>
+            )}
+            <IconButton
+              size="small"
+              title="Close plan"
+              onClick={(event) => {
+                event.stopPropagation();
+                onClose();
+              }}
+              sx={{
+                width: 26,
+                height: 26,
+                borderRadius: 0.5,
+                color: "text.secondary",
+                flexShrink: 0,
+                transition: "color 140ms ease, background-color 140ms ease",
+                "&:hover": {
+                  color: "#ff8a8a",
+                  bgcolor: "rgba(255,120,120,0.12)",
+                },
+              }}
+            >
+              <CloseIcon sx={{ fontSize: 15 }} />
+            </IconButton>
+          </Stack>
           <Typography
             sx={{
               fontFamily: monoFont,
-              fontSize: 10.5,
-              letterSpacing: 1.2,
-              fontWeight: 700,
+              fontSize: 12,
+              letterSpacing: 0.1,
+              fontWeight: 500,
               color: "text.secondary",
             }}
           >
-            DRAFTED BY {plan.createdBy.toUpperCase()} ·{" "}
-            {formatMilitaryShort(plan.modificationDate)}
+            Drafted by {plan.createdBy} · {formatMilitaryShort(plan.modificationDate)}
           </Typography>
 
           <Typography sx={{ color: "text.secondary", fontSize: 13.5, lineHeight: 1.55 }}>
@@ -217,37 +197,41 @@ export default function PlanCard({
                           color: "text.secondary",
                         }}
                       >
-                        <HubIcon sx={{ fontSize: 17 }} />
+                        <LinkIcon sx={{ fontSize: 17 }} />
                       </Box>
-                      <Box sx={{ minWidth: 0, flex: 1 }}>
-                        <Typography
-                          sx={{
-                            fontFamily: monoFont,
-                            fontSize: 11,
-                            fontWeight: 700,
-                            letterSpacing: 1.3,
-                            textTransform: "uppercase",
-                            color: "text.primary",
-                            lineHeight: 1.2,
-                          }}
-                        >
-                          Associated Plans
-                        </Typography>
-                        <Typography
-                          sx={{
-                            fontSize: 11.5,
-                            color: "text.secondary",
-                            mt: 0.25,
-                            lineHeight: 1.2,
-                          }}
-                        >
-                          {associatedPlans.length}{" "}
-                          {associatedPlans.length === 1 ? "plan" : "plans"}
-                          {associatedPlans.some((p) => p.isOpen) &&
-                            ` · ${
-                              associatedPlans.filter((p) => p.isOpen).length
-                            } open`}
-                        </Typography>
+                      <Typography
+                        sx={{
+                          fontFamily: monoFont,
+                          fontSize: 13.5,
+                          fontWeight: 700,
+                          letterSpacing: 0.2,
+                          color: "text.primary",
+                          lineHeight: 1.2,
+                          minWidth: 0,
+                          flex: 1,
+                        }}
+                      >
+                        Associated plans
+                      </Typography>
+                      <Box
+                        sx={{
+                          minWidth: 26,
+                          height: 22,
+                          px: 0.85,
+                          borderRadius: 0.5,
+                          display: "grid",
+                          placeItems: "center",
+                          bgcolor: "rgba(255,255,255,0.06)",
+                          border: "1px solid rgba(255,255,255,0.14)",
+                          color: "text.primary",
+                          fontFamily: monoFont,
+                          fontSize: 12,
+                          fontWeight: 700,
+                          lineHeight: 1,
+                          flexShrink: 0,
+                        }}
+                      >
+                        {associatedPlans.length}
                       </Box>
                       <ExpandMoreIcon
                         sx={{
@@ -281,7 +265,7 @@ export default function PlanCard({
                 )}
 
                 <Stack spacing={1}>
-                  <SectionLabel>ACTIONS</SectionLabel>
+                  <SectionLabel>Actions</SectionLabel>
                   <Box
                     sx={{
                       display: "grid",
@@ -320,8 +304,8 @@ function SectionLabel({ children }: { children: React.ReactNode }) {
     <Typography
       sx={{
         fontFamily: monoFont,
-        fontSize: 10.5,
-        letterSpacing: 1.4,
+        fontSize: 12.5,
+        letterSpacing: 0.2,
         fontWeight: 700,
         color: "text.secondary",
       }}
@@ -347,18 +331,18 @@ function ActionTile({
         display: "flex",
         flexDirection: "column",
         alignItems: "center",
-        justifyContent: "center",
-        gap: 0.65,
-        px: 0.5,
-        py: 1.1,
-        minHeight: 72,
+        justifyContent: "flex-start",
+        gap: 0.5,
+        px: 0.75,
+        pt: 1,
+        pb: 0.85,
+        minHeight: 58,
         borderRadius: 0.5,
         bgcolor: "rgba(255,255,255,0.04)",
         border: "1px solid rgba(255,255,255,0.1)",
         color: "text.secondary",
         transition:
           "background-color 140ms ease, border-color 160ms ease, color 140ms ease",
-        "& > svg": { fontSize: 18 },
         "&:hover": {
           color: "text.primary",
           bgcolor: "rgba(255,255,255,0.08)",
@@ -366,21 +350,38 @@ function ActionTile({
         },
       }}
     >
-      {icon}
-      <Typography
+      <Box
         sx={{
-          fontFamily: monoFont,
-          fontSize: 9.5,
-          fontWeight: 700,
-          letterSpacing: 0.6,
-          textTransform: "uppercase",
-          textAlign: "center",
-          lineHeight: 1.25,
-          color: "inherit",
+          height: 18,
+          display: "flex",
+          alignItems: "center",
+          "& > svg": { fontSize: 16 },
         }}
       >
-        {label}
-      </Typography>
+        {icon}
+      </Box>
+      <Box
+        sx={{
+          minHeight: 30,
+          display: "flex",
+          alignItems: "flex-start",
+          justifyContent: "center",
+        }}
+      >
+        <Typography
+          sx={{
+            fontFamily: monoFont,
+            fontSize: 11,
+            fontWeight: 600,
+            letterSpacing: 0.1,
+            textAlign: "center",
+            lineHeight: 1.3,
+            color: "inherit",
+          }}
+        >
+          {label}
+        </Typography>
+      </Box>
     </ButtonBase>
   );
 }

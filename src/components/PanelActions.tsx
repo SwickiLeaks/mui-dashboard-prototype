@@ -59,11 +59,11 @@ export default function PanelActions({
             bgcolor: accent,
             color: "#0f0f0f",
             borderRadius: 0.5,
-            boxShadow: `0 0 0 1px ${accent}99 inset, 0 4px 14px ${accent}26`,
+            boxShadow: `0 0 0 1px ${accent}99 inset`,
             "&:hover": {
               bgcolor: accent,
               filter: "brightness(1.1)",
-              boxShadow: `0 0 0 1px ${accent} inset, 0 6px 18px ${accent}40`,
+              boxShadow: `0 0 0 1px ${accent} inset`,
             },
           }}
         >

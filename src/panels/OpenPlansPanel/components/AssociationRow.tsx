@@ -68,14 +68,14 @@ export default function AssociationRow({
           <Typography
             sx={{
               fontFamily: monoFont,
-              fontSize: 10,
+              fontSize: 11.5,
               fontWeight: 700,
-              letterSpacing: 1.4,
+              letterSpacing: 0.2,
               color: "#90caf9",
               flexShrink: 0,
             }}
           >
-            OPEN
+            Open
           </Typography>
         )}
       </Stack>

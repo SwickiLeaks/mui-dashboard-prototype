@@ -15,9 +15,9 @@ export default function BreadcrumbSegment({
 }: BreadcrumbSegmentProps) {
   const sx = {
     fontFamily: monoFont,
-    fontSize: 10.5,
-    letterSpacing: 1.3,
-    fontWeight: 700,
+    fontSize: 13,
+    letterSpacing: 0.2,
+    fontWeight: 600,
     maxWidth: 180,
     overflow: "hidden",
     textOverflow: "ellipsis",

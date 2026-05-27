@@ -44,7 +44,7 @@ export default function TransferPanel({ onClose }: TransferPanelProps) {
         }}
       >
         <Stack spacing={1.5}>
-          <TacticalSection label="INCOMING" accent={ACCENT}>
+          <TacticalSection label="Incoming" accent={ACCENT}>
             <Stack spacing={0.85}>
               <TransferRow
                 icon={<UploadFileIcon sx={{ fontSize: 18 }} />}
@@ -67,7 +67,7 @@ export default function TransferPanel({ onClose }: TransferPanelProps) {
             </Stack>
           </TacticalSection>
 
-          <TacticalSection label="OUTGOING" accent={ACCENT}>
+          <TacticalSection label="Outgoing" accent={ACCENT}>
             <Stack spacing={0.85}>
               <TransferRow
                 icon={<FileDownloadIcon sx={{ fontSize: 18 }} />}
@@ -150,10 +150,9 @@ function TransferRow({
           <Typography
             sx={{
               fontFamily: monoFont,
-              fontSize: 12,
-              letterSpacing: 1.3,
+              fontSize: 13.5,
+              letterSpacing: 0.2,
               fontWeight: 700,
-              textTransform: "uppercase",
               color: "text.primary",
               lineHeight: 1.2,
             }}

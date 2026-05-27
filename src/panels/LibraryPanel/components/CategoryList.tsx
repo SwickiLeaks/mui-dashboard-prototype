@@ -72,13 +72,13 @@ export default function CategoryList({ counts, onSelect }: CategoryListProps) {
                 <Typography
                   sx={{
                     fontFamily: monoFont,
-                    fontSize: 13,
+                    fontSize: 14,
                     fontWeight: 700,
-                    letterSpacing: 0.8,
+                    letterSpacing: 0.2,
                     color: "text.primary",
                   }}
                 >
-                  {category.label.toUpperCase()}
+                  {category.label}
                 </Typography>
                 <Typography
                   sx={{
@@ -96,18 +96,18 @@ export default function CategoryList({ counts, onSelect }: CategoryListProps) {
                 <Typography
                   sx={{
                     fontFamily: monoFont,
-                    fontSize: 10.5,
-                    letterSpacing: 1.2,
+                    fontSize: 11.5,
+                    letterSpacing: 0.2,
                     fontWeight: 700,
                     color: "text.secondary",
                     px: 0.85,
-                    py: 0.25,
+                    py: 0.3,
                     border: "1px solid rgba(255,255,255,0.08)",
                     borderRadius: 0.5,
                     flexShrink: 0,
                   }}
                 >
-                  EMPTY
+                  Empty
                 </Typography>
               ) : (
                 <CountChip count={count} accent={LIBRARY_ACCENT} />
