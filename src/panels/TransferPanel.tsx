@@ -13,7 +13,6 @@ import {
   appAccent,
   monoFont,
   scrollbarTacticalSx,
-  tacticalSurface,
 } from "../theme";
 
 type TransferPanelProps = {
@@ -107,16 +106,12 @@ function TransferRow({
         display: "flex",
         alignItems: "stretch",
         cursor: "pointer",
-        bgcolor: tacticalSurface.card,
-        border: `1px solid ${tacticalSurface.border}`,
-        borderRadius: 0.5,
+        bgcolor: "rgba(255,255,255,0.05)",
+        borderRadius: 2,
         overflow: "hidden",
-        transition:
-          "background-color 140ms ease, border-color 160ms ease, box-shadow 200ms ease",
+        transition: "background-color 140ms ease",
         "&:hover": {
-          borderColor: `${ACCENT}88`,
-          bgcolor: tacticalSurface.cardHover,
-          boxShadow: `0 0 0 1px ${ACCENT}33`,
+          bgcolor: "rgba(255,255,255,0.09)",
         },
         "&:hover .transfer-chevron": {
           transform: "translateX(3px)",
@@ -124,7 +119,6 @@ function TransferRow({
         },
       }}
     >
-      <Box sx={{ width: 3, bgcolor: ACCENT, flexShrink: 0 }} />
       <Stack
         direction="row"
         spacing={1.5}
@@ -133,15 +127,14 @@ function TransferRow({
       >
         <Box
           sx={{
-            width: 36,
-            height: 36,
-            borderRadius: 0.5,
+            width: 38,
+            height: 38,
+            borderRadius: "50%",
             display: "grid",
             placeItems: "center",
             flexShrink: 0,
-            bgcolor: `${ACCENT}1c`,
+            bgcolor: `${ACCENT}24`,
             color: ACCENT,
-            border: `1px solid ${ACCENT}55`,
           }}
         >
           {icon}

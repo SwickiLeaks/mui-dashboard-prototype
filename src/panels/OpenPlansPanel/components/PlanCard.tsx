@@ -52,29 +52,27 @@ export default function PlanCard({
       onClick={onSelect}
       sx={{
         cursor: "pointer",
-        bgcolor: selected ? tacticalSurface.cardSelected : tacticalSurface.card,
-        border: `1px solid ${
-          selected ? "rgba(255,255,255,0.35)" : tacticalSurface.border
+        bgcolor: selected ? "#2a3139" : tacticalSurface.card,
+        border: `1.5px solid ${
+          selected ? "rgba(144,202,249,0.6)" : "transparent"
         }`,
-        borderRadius: 0.5,
+        borderRadius: 3,
         boxShadow: selected
-          ? "inset 0 1px 4px rgba(0,0,0,0.5)"
-          : "none",
+          ? "0 6px 18px rgba(0,0,0,0.4)"
+          : "0 2px 6px rgba(0,0,0,0.3)",
         overflow: "hidden",
         transition:
-          "background-color 140ms ease, border-color 160ms ease, box-shadow 200ms ease",
+          "background-color 160ms ease, border-color 160ms ease, box-shadow 220ms ease",
         "&:hover": {
-          borderColor: selected
-            ? "rgba(255,255,255,0.4)"
-            : tacticalSurface.borderHover,
-          bgcolor: selected
-            ? tacticalSurface.cardSelected
-            : tacticalSurface.cardHover,
+          bgcolor: selected ? "#2a3139" : tacticalSurface.cardHover,
+          boxShadow: selected
+            ? "0 8px 20px rgba(0,0,0,0.44)"
+            : "0 6px 16px rgba(0,0,0,0.36)",
         },
       }}
     >
-      <Box sx={{ p: 1.75 }}>
-        <Stack spacing={1.25}>
+      <Box sx={{ p: 2.25 }}>
+        <Stack spacing={1.5}>
           <Stack direction="row" alignItems="center" gap={1}>
             <Typography
               sx={{
@@ -94,16 +92,15 @@ export default function PlanCard({
             {selected && (
               <Box
                 sx={{
-                  px: 0.85,
-                  py: 0.25,
-                  borderRadius: 0.5,
+                  px: 1,
+                  py: 0.3,
+                  borderRadius: "999px",
                   fontFamily: monoFont,
                   fontSize: 11,
                   fontWeight: 600,
                   letterSpacing: 0.1,
                   color: "#90caf9",
-                  bgcolor: "rgba(144,202,249,0.12)",
-                  border: "1px solid rgba(144,202,249,0.4)",
+                  bgcolor: "rgba(144,202,249,0.16)",
                   flexShrink: 0,
                 }}
               >
@@ -118,9 +115,9 @@ export default function PlanCard({
                 onClose();
               }}
               sx={{
-                width: 26,
-                height: 26,
-                borderRadius: 0.5,
+                width: 30,
+                height: 30,
+                borderRadius: "50%",
                 color: "text.secondary",
                 flexShrink: 0,
                 transition: "color 140ms ease, background-color 140ms ease",
@@ -152,15 +149,11 @@ export default function PlanCard({
           {selected && (
             <Box
               onClick={(event) => event.stopPropagation()}
-              sx={{
-                mt: 0.75,
-                pt: 1.5,
-                borderTop: `1px dashed ${tacticalSurface.hairline}`,
-              }}
+              sx={{ mt: 0.5 }}
             >
-              <Stack spacing={1.75}>
+              <Stack spacing={1.25}>
                 {associatedPlans.length > 0 && (
-                  <Stack spacing={associationsExpanded ? 1 : 0}>
+                  <SectionTray>
                     <Box
                       onClick={() =>
                         setAssociationsExpanded((open) => !open)
@@ -168,37 +161,19 @@ export default function PlanCard({
                       sx={{
                         display: "flex",
                         alignItems: "center",
-                        gap: 1.25,
-                        px: 1.25,
-                        py: 1,
-                        borderRadius: 0.5,
-                        bgcolor: "rgba(255,255,255,0.04)",
-                        border: "1px solid rgba(255,255,255,0.12)",
+                        gap: 1,
                         cursor: "pointer",
                         userSelect: "none",
-                        transition:
-                          "background-color 140ms ease, border-color 140ms ease",
-                        "&:hover": {
-                          bgcolor: "rgba(255,255,255,0.08)",
-                          borderColor: "rgba(255,255,255,0.22)",
+                        color: "text.primary",
+                        transition: "color 140ms ease",
+                        "&:hover .assoc-chevron": {
+                          color: "text.primary",
                         },
                       }}
                     >
-                      <Box
-                        sx={{
-                          width: 32,
-                          height: 32,
-                          borderRadius: 0.5,
-                          display: "grid",
-                          placeItems: "center",
-                          flexShrink: 0,
-                          bgcolor: "rgba(255,255,255,0.05)",
-                          border: "1px solid rgba(255,255,255,0.12)",
-                          color: "text.secondary",
-                        }}
-                      >
-                        <LinkIcon sx={{ fontSize: 17 }} />
-                      </Box>
+                      <LinkIcon
+                        sx={{ fontSize: 16, color: "text.secondary" }}
+                      />
                       <Typography
                         sx={{
                           fontFamily: monoFont,
@@ -215,17 +190,16 @@ export default function PlanCard({
                       </Typography>
                       <Box
                         sx={{
-                          minWidth: 26,
-                          height: 22,
+                          minWidth: 24,
+                          height: 20,
                           px: 0.85,
-                          borderRadius: 0.5,
+                          borderRadius: "999px",
                           display: "grid",
                           placeItems: "center",
-                          bgcolor: "rgba(255,255,255,0.06)",
-                          border: "1px solid rgba(255,255,255,0.14)",
+                          bgcolor: "rgba(255,255,255,0.08)",
                           color: "text.primary",
                           fontFamily: monoFont,
-                          fontSize: 12,
+                          fontSize: 11.5,
                           fontWeight: 700,
                           lineHeight: 1,
                           flexShrink: 0,
@@ -234,6 +208,7 @@ export default function PlanCard({
                         {associatedPlans.length}
                       </Box>
                       <ExpandMoreIcon
+                        className="assoc-chevron"
                         sx={{
                           fontSize: 19,
                           color: "text.secondary",
@@ -241,12 +216,12 @@ export default function PlanCard({
                           transform: associationsExpanded
                             ? "rotate(0deg)"
                             : "rotate(-90deg)",
-                          transition: "transform 160ms ease",
+                          transition: "transform 160ms ease, color 140ms ease",
                         }}
                       />
                     </Box>
                     <Collapse in={associationsExpanded} unmountOnExit>
-                      <Stack spacing={0.75}>
+                      <Stack spacing={0.75} sx={{ mt: 1.25 }}>
                         {associatedPlans.map((associated) => (
                           <AssociationRow
                             key={associated.id}
@@ -261,35 +236,36 @@ export default function PlanCard({
                         ))}
                       </Stack>
                     </Collapse>
-                  </Stack>
+                  </SectionTray>
                 )}
 
-                <Stack spacing={1}>
-                  <SectionLabel>Actions</SectionLabel>
+                <SectionTray>
+                  <SectionLabel>Plan actions</SectionLabel>
                   <Box
                     sx={{
+                      mt: 1,
                       display: "grid",
-                      gridTemplateColumns: "repeat(3, 1fr)",
+                      gridTemplateColumns: "1fr 1fr",
                       gap: 0.75,
                     }}
                   >
-                    <ActionTile
+                    <ActionRow
                       icon={<FlagIcon />}
-                      label="Associate Mission"
+                      label="Associate mission"
                       onClick={noop}
                     />
-                    <ActionTile
+                    <ActionRow
                       icon={<LayersIcon />}
-                      label="Associate Shape Collection"
+                      label="Associate shape collection"
                       onClick={noop}
                     />
-                    <ActionTile
+                    <ActionRow
                       icon={<ArticleIcon />}
-                      label="Associate Plan"
+                      label="Associate plan"
                       onClick={noop}
                     />
                   </Box>
-                </Stack>
+                </SectionTray>
               </Stack>
             </Box>
           )}
@@ -299,15 +275,29 @@ export default function PlanCard({
   );
 }
 
+function SectionTray({ children }: { children: React.ReactNode }) {
+  return (
+    <Box
+      sx={{
+        bgcolor: "rgba(0,0,0,0.2)",
+        borderRadius: 2.5,
+        p: 1.5,
+      }}
+    >
+      {children}
+    </Box>
+  );
+}
+
 function SectionLabel({ children }: { children: React.ReactNode }) {
   return (
     <Typography
       sx={{
         fontFamily: monoFont,
-        fontSize: 12.5,
+        fontSize: 13.5,
         letterSpacing: 0.2,
         fontWeight: 700,
-        color: "text.secondary",
+        color: "text.primary",
       }}
     >
       {children}
@@ -315,7 +305,7 @@ function SectionLabel({ children }: { children: React.ReactNode }) {
   );
 }
 
-function ActionTile({
+function ActionRow({
   icon,
   label,
   onClick,
@@ -329,59 +319,45 @@ function ActionTile({
       onClick={onClick}
       sx={{
         display: "flex",
-        flexDirection: "column",
         alignItems: "center",
-        justifyContent: "flex-start",
-        gap: 0.5,
-        px: 0.75,
-        pt: 1,
-        pb: 0.85,
-        minHeight: 58,
-        borderRadius: 0.5,
-        bgcolor: "rgba(255,255,255,0.04)",
-        border: "1px solid rgba(255,255,255,0.1)",
+        width: "100%",
+        height: "100%",
+        gap: 1.25,
+        px: 1.25,
+        py: 1,
+        minHeight: 44,
+        borderRadius: 2,
+        bgcolor: "rgba(255,255,255,0.06)",
         color: "text.secondary",
-        transition:
-          "background-color 140ms ease, border-color 160ms ease, color 140ms ease",
+        transition: "background-color 140ms ease, color 140ms ease",
         "&:hover": {
+          bgcolor: "rgba(255,255,255,0.11)",
           color: "text.primary",
-          bgcolor: "rgba(255,255,255,0.08)",
-          borderColor: "rgba(255,255,255,0.22)",
         },
       }}
     >
       <Box
         sx={{
-          height: 18,
-          display: "flex",
-          alignItems: "center",
-          "& > svg": { fontSize: 16 },
+          display: "inline-flex",
+          color: "inherit",
+          "& > svg": { fontSize: 18 },
         }}
       >
         {icon}
       </Box>
-      <Box
+      <Typography
         sx={{
-          minHeight: 30,
-          display: "flex",
-          alignItems: "flex-start",
-          justifyContent: "center",
+          flex: 1,
+          textAlign: "left",
+          fontFamily: monoFont,
+          fontSize: 13,
+          fontWeight: 500,
+          letterSpacing: 0.1,
+          color: "inherit",
         }}
       >
-        <Typography
-          sx={{
-            fontFamily: monoFont,
-            fontSize: 11,
-            fontWeight: 600,
-            letterSpacing: 0.1,
-            textAlign: "center",
-            lineHeight: 1.3,
-            color: "inherit",
-          }}
-        >
-          {label}
-        </Typography>
-      </Box>
+        {label}
+      </Typography>
     </ButtonBase>
   );
 }

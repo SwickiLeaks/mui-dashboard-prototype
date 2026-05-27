@@ -46,17 +46,16 @@ const toolButtonSx = {
   fontFamily: monoFont,
   fontSize: 13,
   letterSpacing: 0.2,
-  fontWeight: 600,
+  fontWeight: 500,
+  textTransform: "none",
   color: "text.secondary",
-  borderRadius: 0.5,
-  px: 1,
-  py: 0.7,
-  border: "1px solid transparent",
-  "& .MuiButton-startIcon": { mr: 0.85, ml: 0 },
+  borderRadius: 2,
+  px: 1.25,
+  py: 0.85,
+  "& .MuiButton-startIcon": { mr: 1, ml: 0 },
   "&:hover": {
-    bgcolor: "rgba(255,255,255,0.04)",
+    bgcolor: "rgba(255,255,255,0.06)",
     color: "text.primary",
-    borderColor: "rgba(255,255,255,0.12)",
   },
 } as const;
 
@@ -75,7 +74,7 @@ export default function ToolsPanel({ onClose }: ToolsPanelProps) {
           flex: 1,
           minHeight: 0,
           overflowY: "auto",
-          p: 1.5,
+          p: 2,
           ...scrollbarTacticalSx,
         }}
       >
@@ -97,7 +96,7 @@ export default function ToolsPanel({ onClose }: ToolsPanelProps) {
 
       <Box
         sx={{
-          bgcolor: "#161616",
+          bgcolor: "transparent",
           borderTop: `1px solid ${tacticalSurface.hairline}`,
           px: 1.5,
           py: 1.25,
@@ -110,19 +109,17 @@ export default function ToolsPanel({ onClose }: ToolsPanelProps) {
             onClick={onClose}
             sx={{
               fontFamily: monoFont,
-              fontSize: 11,
-              fontWeight: 700,
-              letterSpacing: 1.4,
-              textTransform: "uppercase",
-              height: 32,
-              px: 1.5,
+              fontSize: 13,
+              fontWeight: 600,
+              letterSpacing: 0.1,
+              textTransform: "none",
+              height: 36,
+              px: 2,
               color: "text.secondary",
-              border: "1px solid rgba(255,255,255,0.12)",
-              borderRadius: 0.5,
+              borderRadius: 2,
               "&:hover": {
                 color: "text.primary",
-                bgcolor: "rgba(255,255,255,0.05)",
-                borderColor: "rgba(255,255,255,0.25)",
+                bgcolor: "rgba(255,255,255,0.06)",
               },
             }}
           >

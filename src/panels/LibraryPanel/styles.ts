@@ -13,8 +13,9 @@ export const LIBRARY_ACCENT = "#bdbdbd";
 export const cardOuterSx = {
   flexShrink: 0,
   bgcolor: tacticalSurface.card,
-  border: `1px solid ${tacticalSurface.border}`,
-  borderRadius: 0.5,
+  border: "1.5px solid transparent",
+  borderRadius: 3,
+  boxShadow: "0 2px 6px rgba(0,0,0,0.3)",
   overflow: "hidden",
   cursor: "pointer",
   transition:

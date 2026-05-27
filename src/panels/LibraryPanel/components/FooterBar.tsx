@@ -22,7 +22,7 @@ export default function FooterBar({
       sx={{
         flexShrink: 0,
         position: "relative",
-        bgcolor: "#161616",
+        bgcolor: "transparent",
         borderTop: `1px solid ${tacticalSurface.hairline}`,
         px: 2,
         py: 1.5,
@@ -42,23 +42,19 @@ export default function FooterBar({
         >
           <Box
             sx={{
-              width: 36,
-              height: 36,
-              borderRadius: 0.5,
+              width: 38,
+              height: 38,
+              borderRadius: "50%",
               display: "grid",
               placeItems: "center",
               flexShrink: 0,
-              bgcolor: hasSelection ? `${accent}1f` : "rgba(255,255,255,0.04)",
-              border: `1px solid ${
-                hasSelection ? `${accent}55` : "rgba(255,255,255,0.08)"
-              }`,
+              bgcolor: hasSelection ? `${accent}2b` : "rgba(255,255,255,0.05)",
               color: hasSelection ? accent : "text.secondary",
               fontFamily: monoFont,
               fontWeight: 700,
               fontSize: 15,
               lineHeight: 1,
-              transition:
-                "background-color 220ms ease, border-color 220ms ease, color 220ms ease",
+              transition: "background-color 220ms ease, color 220ms ease",
             }}
           >
             {count}
@@ -67,16 +63,16 @@ export default function FooterBar({
             <Typography
               sx={{
                 fontFamily: monoFont,
-                fontSize: 10.5,
-                letterSpacing: 1.4,
+                fontSize: 13,
+                letterSpacing: 0.2,
                 fontWeight: 700,
                 color: hasSelection ? "text.primary" : "text.secondary",
               }}
               noWrap
             >
               {hasSelection
-                ? `PLAN${count === 1 ? "" : "S"} SELECTED`
-                : "NOTHING SELECTED"}
+                ? `${count} plan${count === 1 ? "" : "s"} selected`
+                : "Nothing selected"}
             </Typography>
             <Typography
               sx={{
@@ -98,17 +94,17 @@ export default function FooterBar({
             onClick={onCancel}
             sx={{
               fontFamily: monoFont,
-              fontSize: 11,
-              fontWeight: 700,
-              letterSpacing: 1.4,
-              textTransform: "uppercase",
-              height: 32,
-              px: 1.25,
+              fontSize: 13,
+              fontWeight: 600,
+              letterSpacing: 0.1,
+              textTransform: "none",
+              height: 36,
+              px: 1.75,
               color: "text.secondary",
-              borderRadius: 0.5,
+              borderRadius: 2,
               "&:hover": {
                 color: "text.primary",
-                bgcolor: "rgba(255,255,255,0.05)",
+                bgcolor: "rgba(255,255,255,0.06)",
               },
             }}
           >
@@ -120,32 +116,28 @@ export default function FooterBar({
             onClick={onConfirm}
             sx={{
               fontFamily: monoFont,
-              fontSize: 11.5,
-              fontWeight: 700,
-              letterSpacing: 1.4,
-              textTransform: "uppercase",
-              height: 32,
-              px: 1.5,
+              fontSize: 13,
+              fontWeight: 600,
+              letterSpacing: 0.1,
+              textTransform: "none",
+              height: 36,
+              px: 2.25,
               minWidth: 120,
               bgcolor: accent,
-              color: "#0f0f0f",
-              borderRadius: 0.5,
-              boxShadow: `0 0 0 1px ${accent}99 inset`,
-              transition:
-                "background-color 160ms ease, box-shadow 160ms ease, filter 160ms ease",
+              color: "#0f1115",
+              borderRadius: 2,
+              transition: "background-color 160ms ease, filter 160ms ease",
               "&:hover": {
                 bgcolor: accent,
-                filter: "brightness(1.1)",
-                boxShadow: `0 0 0 1px ${accent} inset`,
+                filter: "brightness(1.08)",
               },
               "&:disabled": {
                 bgcolor: "rgba(255,255,255,0.05)",
                 color: "rgba(255,255,255,0.3)",
-                boxShadow: "none",
               },
             }}
           >
-            {count > 1 ? "Open Plans" : "Open Plan"}
+            {count > 1 ? "Open plans" : "Open plan"}
           </Button>
         </Stack>
       </Stack>

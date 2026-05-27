@@ -85,18 +85,18 @@ export default function ItemList({
             onClick={() => onToggle(plan.id)}
             sx={{
               ...cardOuterSx,
-              borderColor: selected ? appAccent : tacticalSurface.border,
-              bgcolor: selected
-                ? `${appAccent}14`
-                : tacticalSurface.card,
+              borderColor: selected
+                ? "rgba(144,202,249,0.6)"
+                : "transparent",
+              bgcolor: selected ? "#2a3139" : tacticalSurface.card,
               boxShadow: selected
-                ? `0 0 0 1px ${appAccent}66`
-                : "none",
+                ? "0 6px 18px rgba(0,0,0,0.4)"
+                : cardOuterSx.boxShadow,
               "&:hover": {
-                bgcolor: selected
-                  ? `${appAccent}1f`
-                  : tacticalSurface.cardHover,
-                borderColor: selected ? appAccent : tacticalSurface.borderHover,
+                bgcolor: selected ? "#2a3139" : tacticalSurface.cardHover,
+                boxShadow: selected
+                  ? "0 8px 20px rgba(0,0,0,0.44)"
+                  : "0 6px 16px rgba(0,0,0,0.36)",
               },
             }}
           >

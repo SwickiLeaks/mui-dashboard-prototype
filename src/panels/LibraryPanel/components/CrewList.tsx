@@ -57,9 +57,8 @@ export default function CrewList({ crewMembers, onSelect }: CrewListProps) {
           sx={{
             ...cardOuterSx,
             "&:hover": {
-              borderColor: LIBRARY_ACCENT,
               bgcolor: tacticalSurface.cardHover,
-              boxShadow: `0 0 0 1px ${LIBRARY_ACCENT}33`,
+              boxShadow: "0 6px 16px rgba(0,0,0,0.36)",
             },
             "&:hover .crew-chevron": {
               transform: "translateX(3px)",
@@ -67,19 +66,18 @@ export default function CrewList({ crewMembers, onSelect }: CrewListProps) {
             },
           }}
         >
-          <Box sx={{ p: 1.5 }}>
+          <Box sx={{ p: 1.75 }}>
             <Stack direction="row" spacing={1.5} alignItems="center">
               <Box
                 sx={{
-                  width: 36,
-                  height: 36,
-                  borderRadius: 0.5,
+                  width: 40,
+                  height: 40,
+                  borderRadius: "50%",
                   display: "grid",
                   placeItems: "center",
                   flexShrink: 0,
-                  bgcolor: `${LIBRARY_ACCENT}1c`,
+                  bgcolor: `${LIBRARY_ACCENT}24`,
                   color: LIBRARY_ACCENT,
-                  border: `1px solid ${LIBRARY_ACCENT}55`,
                   fontFamily: monoFont,
                   fontSize: 13,
                   fontWeight: 700,

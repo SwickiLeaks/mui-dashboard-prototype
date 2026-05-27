@@ -40,9 +40,9 @@ export default function WizardPanel({
     <Box
       sx={{
         bgcolor: tacticalSurface.panel,
-        border: "1px solid #3a3a3a",
-        borderRadius: 0.5,
-        boxShadow: "12px 0 32px rgba(0,0,0,0.45)",
+        border: "1px solid rgba(255,255,255,0.08)",
+        borderRadius: 3,
+        boxShadow: "0 16px 48px rgba(0,0,0,0.5)",
         height: "calc(100vh - 112px)",
         width: "100%",
         display: "flex",

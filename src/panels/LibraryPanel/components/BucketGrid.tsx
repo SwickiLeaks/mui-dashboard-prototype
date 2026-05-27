@@ -33,11 +33,10 @@ export default function BucketGrid({ counts, onSelect }: BucketGridProps) {
             onClick={() => onSelect(bucket.key)}
             sx={{
               ...cardOuterSx,
-              p: 1.5,
+              p: 1.75,
               "&:hover": {
-                borderColor: LIBRARY_ACCENT,
                 bgcolor: tacticalSurface.cardHover,
-                boxShadow: `0 0 0 1px ${LIBRARY_ACCENT}33`,
+                boxShadow: "0 6px 16px rgba(0,0,0,0.36)",
               },
               "&:hover .bucket-chevron": {
                 transform: "translateX(3px)",
@@ -48,14 +47,13 @@ export default function BucketGrid({ counts, onSelect }: BucketGridProps) {
             <Stack direction="row" spacing={1.5} alignItems="center">
               <Box
                 sx={{
-                  width: 38,
-                  height: 38,
-                  borderRadius: 0.5,
+                  width: 40,
+                  height: 40,
+                  borderRadius: "50%",
                   display: "grid",
                   placeItems: "center",
-                  bgcolor: `${LIBRARY_ACCENT}1a`,
+                  bgcolor: `${LIBRARY_ACCENT}24`,
                   color: LIBRARY_ACCENT,
-                  border: `1px solid ${LIBRARY_ACCENT}40`,
                   flexShrink: 0,
                 }}
               >

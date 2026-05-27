@@ -36,14 +36,14 @@ export default function CategoryList({ counts, onSelect }: CategoryListProps) {
             onClick={empty ? undefined : () => onSelect(category.key)}
             sx={{
               ...cardOuterSx,
-              p: 1.5,
+              p: 1.75,
               cursor: empty ? "default" : "pointer",
               opacity: empty ? 0.55 : 1,
+              boxShadow: empty ? "none" : cardOuterSx.boxShadow,
               "&:hover": !empty
                 ? {
-                    borderColor: LIBRARY_ACCENT,
                     bgcolor: tacticalSurface.cardHover,
-                    boxShadow: `0 0 0 1px ${LIBRARY_ACCENT}33`,
+                    boxShadow: "0 6px 16px rgba(0,0,0,0.36)",
                   }
                 : undefined,
               "&:hover .category-chevron": !empty
@@ -54,14 +54,15 @@ export default function CategoryList({ counts, onSelect }: CategoryListProps) {
             <Stack direction="row" spacing={1.5} alignItems="center">
               <Box
                 sx={{
-                  width: 34,
-                  height: 34,
-                  borderRadius: 0.5,
+                  width: 38,
+                  height: 38,
+                  borderRadius: "50%",
                   display: "grid",
                   placeItems: "center",
-                  bgcolor: "rgba(255,255,255,0.04)",
+                  bgcolor: empty
+                    ? "rgba(255,255,255,0.05)"
+                    : `${sprinkle}24`,
                   color: empty ? "text.secondary" : sprinkle,
-                  border: "1px solid rgba(255,255,255,0.1)",
                   flexShrink: 0,
                 }}
               >

@@ -24,11 +24,10 @@ export function ClassificationBanner({
     <Box
       sx={{
         position: "relative",
-        px: 2.25,
-        py: 1.5,
-        bgcolor: tacticalSurface.banner,
-        borderBottom: `1px solid ${tacticalSurface.borderHover}`,
-        overflow: "hidden",
+        px: 2,
+        py: 1.75,
+        bgcolor: "transparent",
+        borderBottom: `1px solid ${tacticalSurface.hairline}`,
         flexShrink: 0,
       }}
     >
@@ -38,14 +37,19 @@ export function ClassificationBanner({
         alignItems="center"
         sx={{ position: "relative", minHeight: 30 }}
       >
-        <Stack direction="row" spacing={1} alignItems="center" sx={{ minWidth: 0 }}>
+        <Stack
+          direction="row"
+          spacing={1}
+          alignItems="baseline"
+          sx={{ minWidth: 0 }}
+        >
           <Typography
             sx={{
               fontFamily: monoFont,
-              fontSize: 11,
-              letterSpacing: 1.8,
+              fontSize: 13,
+              letterSpacing: 0.8,
               fontWeight: 700,
-              color: "text.secondary",
+              color: "text.primary",
               whiteSpace: "nowrap",
             }}
           >
@@ -55,18 +59,17 @@ export function ClassificationBanner({
             <>
               <Typography
                 sx={{
-                  fontFamily: monoFont,
-                  fontSize: 11,
-                  color: "rgba(255,255,255,0.25)",
+                  fontSize: 12,
+                  color: "rgba(255,255,255,0.3)",
                 }}
               >
-                //
+                ·
               </Typography>
               <Typography
                 sx={{
                   fontFamily: monoFont,
-                  fontSize: 11,
-                  letterSpacing: 1.8,
+                  fontSize: 11.5,
+                  letterSpacing: 0.6,
                   fontWeight: 700,
                   color: statusActive ? "#90caf9" : "text.secondary",
                   whiteSpace: "nowrap",
@@ -83,19 +86,17 @@ export function ClassificationBanner({
               size="small"
               onClick={onClose}
               sx={{
-                width: 26,
-                height: 26,
-                borderRadius: 0.5,
+                width: 30,
+                height: 30,
+                borderRadius: "50%",
                 color: "text.secondary",
-                border: "1px solid rgba(255,255,255,0.08)",
                 "&:hover": {
                   color: "text.primary",
-                  bgcolor: "rgba(255,255,255,0.04)",
-                  borderColor: "rgba(255,255,255,0.2)",
+                  bgcolor: "rgba(255,255,255,0.07)",
                 },
               }}
             >
-              <CloseIcon sx={{ fontSize: 15 }} />
+              <CloseIcon sx={{ fontSize: 16 }} />
             </IconButton>
           ))}
       </Stack>
@@ -108,7 +109,6 @@ type TacticalSectionProps = {
   icon?: React.ComponentType<{ sx?: object }>;
   accent: string;
   children: React.ReactNode;
-  bodyPadding?: number | string;
 };
 
 export function TacticalSection({
@@ -116,43 +116,35 @@ export function TacticalSection({
   icon: Icon,
   accent,
   children,
-  bodyPadding = 1.75,
 }: TacticalSectionProps) {
   return (
     <Box
       sx={{
-        bgcolor: tacticalSurface.card,
-        border: `1px solid ${tacticalSurface.border}`,
-        borderRadius: 0.5,
-        overflow: "hidden",
+        bgcolor: "rgba(0,0,0,0.2)",
+        borderRadius: 2.5,
+        p: 1.5,
       }}
     >
-      <Box
-        sx={{
-          display: "flex",
-          alignItems: "center",
-          gap: 1,
-          px: 1.5,
-          py: 0.95,
-          bgcolor: tacticalSurface.cardHeader,
-          borderBottom: `1px solid ${tacticalSurface.hairline}`,
-        }}
+      <Stack
+        direction="row"
+        alignItems="center"
+        gap={1}
+        sx={{ mb: 1.25 }}
       >
-        <Box sx={{ width: 3, height: 14, bgcolor: accent, flexShrink: 0 }} />
-        {Icon && <Icon sx={{ fontSize: 13, color: "text.secondary" }} />}
+        {Icon && <Icon sx={{ fontSize: 16, color: accent }} />}
         <Typography
           sx={{
             fontFamily: monoFont,
-            fontSize: 12.5,
+            fontSize: 13.5,
             letterSpacing: 0.2,
             fontWeight: 700,
-            color: "text.secondary",
+            color: "text.primary",
           }}
         >
           {label}
         </Typography>
-      </Box>
-      <Box sx={{ p: bodyPadding }}>{children}</Box>
+      </Stack>
+      <Box>{children}</Box>
     </Box>
   );
 }

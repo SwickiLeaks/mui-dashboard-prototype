@@ -27,17 +27,16 @@ export default function EmptyState({ onOpenLibrary }: EmptyStateProps) {
       <Stack spacing={2.5} alignItems="center" sx={{ maxWidth: 320 }}>
         <Box
           sx={{
-            width: 64,
-            height: 64,
-            borderRadius: 0.5,
+            width: 72,
+            height: 72,
+            borderRadius: "50%",
             display: "grid",
             placeItems: "center",
             color: ACCENT,
-            bgcolor: `${ACCENT}14`,
-            border: `1px solid ${ACCENT}55`,
+            bgcolor: `${ACCENT}1f`,
           }}
         >
-          <BookmarkIcon sx={{ fontSize: 28 }} />
+          <BookmarkIcon sx={{ fontSize: 30 }} />
         </Box>
 
         <Box>
@@ -68,22 +67,19 @@ export default function EmptyState({ onOpenLibrary }: EmptyStateProps) {
           onClick={onOpenLibrary}
           sx={{
             fontFamily: monoFont,
-            fontSize: 11.5,
-            fontWeight: 700,
-            letterSpacing: 1.4,
-            textTransform: "uppercase",
-            color: ACCENT,
-            bgcolor: `${ACCENT}14`,
-            border: `1px solid ${ACCENT}66`,
-            borderRadius: 0.5,
-            px: 2.25,
-            py: 0.85,
-            transition:
-              "background-color 160ms ease, border-color 160ms ease",
+            fontSize: 13,
+            fontWeight: 600,
+            letterSpacing: 0.2,
+            color: "#0f1115",
+            bgcolor: ACCENT,
+            borderRadius: 2,
+            px: 2.5,
+            py: 1,
+            transition: "background-color 160ms ease, filter 160ms ease",
             "& .MuiButton-startIcon": { mr: 0.85 },
             "&:hover": {
-              bgcolor: `${ACCENT}26`,
-              borderColor: ACCENT,
+              bgcolor: ACCENT,
+              filter: "brightness(1.08)",
             },
           }}
         >

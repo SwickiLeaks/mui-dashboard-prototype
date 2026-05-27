@@ -67,7 +67,7 @@ export default function OpenPlansPanel({
             ...scrollbarTacticalSx,
           }}
         >
-          <Stack spacing={1.5}>
+          <Stack spacing={2}>
             {openPlans.map((plan) => {
               const isSelected = selectedPlan?.id === plan.id;
               const associatedPlans = plan.associatedPlanIds

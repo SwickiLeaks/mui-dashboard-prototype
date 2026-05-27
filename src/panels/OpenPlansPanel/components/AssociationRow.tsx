@@ -28,32 +28,29 @@ export default function AssociationRow({
         display: "flex",
         alignItems: "center",
         gap: 1.25,
-        py: 0.85,
-        px: 1.1,
-        borderRadius: 0.5,
-        bgcolor: "rgba(255,255,255,0.02)",
-        border: "1px solid rgba(255,255,255,0.06)",
-        transition: "background-color 140ms ease, border-color 140ms ease",
+        py: 1,
+        px: 1.25,
+        borderRadius: 2,
+        bgcolor: "rgba(255,255,255,0.05)",
+        transition: "background-color 140ms ease",
         "&:hover": {
-          bgcolor: "rgba(255,255,255,0.04)",
-          borderColor: "rgba(255,255,255,0.14)",
+          bgcolor: "rgba(255,255,255,0.09)",
         },
       }}
     >
       <Box
         sx={{
-          width: 26,
-          height: 26,
-          borderRadius: 0.5,
+          width: 28,
+          height: 28,
+          borderRadius: "50%",
           display: "grid",
           placeItems: "center",
           flexShrink: 0,
-          bgcolor: `${accent}1c`,
+          bgcolor: `${accent}24`,
           color: accent,
-          border: `1px solid ${accent}40`,
         }}
       >
-        <ArticleIcon sx={{ fontSize: 13 }} />
+        <ArticleIcon sx={{ fontSize: 14 }} />
       </Box>
       <Stack
         direction="row"
