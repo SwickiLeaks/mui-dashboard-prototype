@@ -131,17 +131,17 @@ export default function LibraryPanel({
     path.bucket === "aircrew" ? view === "crew" : view === "categories";
 
   const statusLabel = (() => {
-    if (view === "root") return "BROWSE";
-    if (view === "categories") return bucketMeta?.label.toUpperCase() ?? "";
-    if (view === "crew") return "AIRCREW";
-    return categoryMeta?.label.toUpperCase() ?? "";
+    if (view === "root") return "Browse";
+    if (view === "categories") return bucketMeta?.label ?? "";
+    if (view === "crew") return "Aircrew";
+    return categoryMeta?.label ?? "";
   })();
 
   return (
     <>
       <ClassificationBanner
         accent={appAccent}
-        label="LIBRARY"
+        label="Library"
         status={statusLabel}
       />
 

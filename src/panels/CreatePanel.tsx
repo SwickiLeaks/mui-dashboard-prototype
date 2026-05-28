@@ -20,7 +20,7 @@ export default function CreatePanel({ onClose }: CreatePanelProps) {
     <>
       <ClassificationBanner
         accent={appAccent}
-        label="CREATE"
+        label="Create"
         onClose={onClose}
       />
 

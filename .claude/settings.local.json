@@ -3,7 +3,10 @@
     "allow": [
       "Bash(npx tsc *)",
       "Bash(npm run *)",
-      "Bash(npx vite *)"
+      "Bash(npx vite *)",
+      "Bash(git ls-tree *)",
+      "Bash(git restore *)",
+      "Bash(rm -f src/panels/OpenPlansPanel/foreflightTheme.ts)"
     ]
   }
 }

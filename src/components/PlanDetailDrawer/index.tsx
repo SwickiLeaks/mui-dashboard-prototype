@@ -26,8 +26,8 @@ export default function PlanDetailDrawer({ onClose }: PlanDetailDrawerProps) {
     >
       <ClassificationBanner
         accent={appAccent}
-        label="WEAPON PLAN EDITOR"
-        status="ACTIVE"
+        label="Weapon Plan Editor"
+        status="Active"
         statusActive
         onClose={onClose}
       />

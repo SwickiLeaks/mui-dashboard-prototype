@@ -1,9 +1,11 @@
 import { Box, ButtonBase, Popover, Typography } from "@mui/material";
 
-import AdminPanelSettingsIcon from "@mui/icons-material/AdminPanelSettings";
-import LocalGasStationIcon from "@mui/icons-material/LocalGasStation";
+import FolderIcon from "@mui/icons-material/Folder";
+import HubIcon from "@mui/icons-material/Hub";
+import KeyIcon from "@mui/icons-material/Key";
+import WaterDropIcon from "@mui/icons-material/WaterDrop";
 
-import { appAccent, monoFont } from "../../../theme";
+import { appAccent, monoFont, tacticalSurface } from "../../../theme";
 
 type AppSwitcherMenuProps = {
   anchorEl: HTMLElement | null;
@@ -18,20 +20,11 @@ type AppEntry = {
 };
 
 const apps: AppEntry[] = [
-  { key: "admin", label: "Admin", icon: <AdminPanelSettingsIcon /> },
-  {
-    key: "fuel",
-    label: "Package Fuel Planner",
-    icon: <LocalGasStationIcon />,
-  },
+  { key: "data", label: "Data Management", icon: <FolderIcon /> },
+  { key: "edge", label: "Edge Compute", icon: <HubIcon /> },
+  { key: "nifi", label: "NiFi", icon: <WaterDropIcon /> },
+  { key: "keycloak", label: "KeyCloak", icon: <KeyIcon /> },
 ];
-
-const TILE_SIZE = 92;
-const GRID_COLUMNS = 3;
-const GRID_GAP = 8;
-const GRID_PADDING = 14;
-const PANEL_WIDTH =
-  GRID_COLUMNS * TILE_SIZE + (GRID_COLUMNS - 1) * GRID_GAP + GRID_PADDING * 2;
 
 export default function AppSwitcherMenu({
   anchorEl,
@@ -49,10 +42,11 @@ export default function AppSwitcherMenu({
         paper: {
           sx: {
             mt: 1,
-            bgcolor: "#121212",
-            border: "1px solid #2a2a2a",
-            borderRadius: 0.5,
-            boxShadow: "0 16px 40px rgba(0,0,0,0.6)",
+            minWidth: 248,
+            bgcolor: tacticalSurface.card,
+            border: `1px solid ${tacticalSurface.border}`,
+            borderRadius: 2,
+            boxShadow: "0 12px 32px rgba(0,0,0,0.5)",
             overflow: "hidden",
           },
         },
@@ -60,28 +54,16 @@ export default function AppSwitcherMenu({
     >
       <Box
         sx={{
-          px: 1.75,
-          py: 1.25,
-          bgcolor: "#0f0f0f",
-          borderBottom: "1px solid #2a2a2a",
-          display: "flex",
-          alignItems: "center",
-          gap: 1,
+          px: 1.5,
+          py: 1,
+          borderBottom: `1px solid ${tacticalSurface.hairline}`,
         }}
       >
-        <Box
-          sx={{
-            width: 3,
-            height: 14,
-            bgcolor: appAccent,
-            borderRadius: 0.5,
-          }}
-        />
         <Typography
           sx={{
             fontFamily: monoFont,
-            fontSize: 12.5,
-            letterSpacing: 0.2,
+            fontSize: 11.5,
+            letterSpacing: 0.3,
             fontWeight: 700,
             color: "text.secondary",
           }}
@@ -90,52 +72,24 @@ export default function AppSwitcherMenu({
         </Typography>
       </Box>
 
-      <Box
-        sx={{
-          width: PANEL_WIDTH,
-          minHeight: PANEL_WIDTH - 40,
-          p: `${GRID_PADDING}px`,
-          display: "grid",
-          gridTemplateColumns: `repeat(${GRID_COLUMNS}, ${TILE_SIZE}px)`,
-          gridAutoRows: `${TILE_SIZE}px`,
-          gap: `${GRID_GAP}px`,
-          alignContent: "flex-start",
-        }}
-      >
+      <Box sx={{ py: 0.5 }}>
         {apps.map((app) => (
           <ButtonBase
             key={app.key}
             onClick={onClose}
             sx={{
-              position: "relative",
-              overflow: "hidden",
               display: "flex",
-              flexDirection: "column",
               alignItems: "center",
-              justifyContent: "center",
-              gap: 0.75,
-              px: 0.75,
-              bgcolor: "#1a1a1a",
-              border: "1px solid #2a2a2a",
-              borderRadius: 0.5,
+              justifyContent: "flex-start",
+              width: "100%",
+              gap: 1.25,
+              px: 1.5,
+              py: 1,
               color: "text.secondary",
-              transition:
-                "background-color 160ms ease, border-color 160ms ease, color 160ms ease",
-              "&::after": {
-                content: '""',
-                position: "absolute",
-                left: 0,
-                right: 0,
-                top: 0,
-                height: 2,
-                bgcolor: "transparent",
-                transition: "background-color 160ms ease",
-              },
+              transition: "background-color 140ms ease, color 140ms ease",
               "&:hover": {
-                bgcolor: "#222",
-                borderColor: appAccent,
+                bgcolor: "rgba(255,255,255,0.06)",
                 color: "text.primary",
-                "&::after": { bgcolor: appAccent },
               },
             }}
           >
@@ -143,7 +97,7 @@ export default function AppSwitcherMenu({
               sx={{
                 display: "inline-flex",
                 color: appAccent,
-                "& > svg": { fontSize: 26 },
+                "& > svg": { fontSize: 20 },
               }}
             >
               {app.icon}
@@ -151,11 +105,10 @@ export default function AppSwitcherMenu({
             <Typography
               sx={{
                 fontFamily: monoFont,
-                fontSize: 11,
-                letterSpacing: 0.2,
-                fontWeight: 600,
-                textAlign: "center",
-                lineHeight: 1.25,
+                fontSize: 13.5,
+                fontWeight: 500,
+                letterSpacing: 0.1,
+                color: "inherit",
               }}
             >
               {app.label}

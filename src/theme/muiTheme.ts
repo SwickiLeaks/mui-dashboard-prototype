@@ -21,6 +21,14 @@ export const darkTheme = createTheme({
     fontFamily: bodyFont,
   },
   components: {
+    MuiButton: {
+      styleOverrides: {
+        root: {
+          // No all-caps by default; opt in with textTransform where needed.
+          textTransform: "none",
+        },
+      },
+    },
     MuiPaper: {
       styleOverrides: {
         root: {

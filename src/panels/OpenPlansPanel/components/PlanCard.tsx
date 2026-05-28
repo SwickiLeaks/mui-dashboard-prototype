@@ -251,17 +251,17 @@ export default function PlanCard({
                   >
                     <ActionRow
                       icon={<FlagIcon />}
-                      label="Associate mission"
+                      label="Add mission"
                       onClick={noop}
                     />
                     <ActionRow
                       icon={<LayersIcon />}
-                      label="Associate shape collection"
+                      label="Add shape collection"
                       onClick={noop}
                     />
                     <ActionRow
                       icon={<ArticleIcon />}
-                      label="Associate plan"
+                      label="Add plan"
                       onClick={noop}
                     />
                   </Box>
@@ -308,51 +308,49 @@ function SectionLabel({ children }: { children: React.ReactNode }) {
 function ActionRow({
   icon,
   label,
+  title,
   onClick,
 }: {
   icon: React.ReactNode;
   label: string;
+  title?: string;
   onClick: () => void;
 }) {
   return (
     <ButtonBase
       onClick={onClick}
+      title={title}
       sx={{
         display: "flex",
         alignItems: "center",
+        justifyContent: "flex-start",
         width: "100%",
-        height: "100%",
-        gap: 1.25,
+        gap: 0.85,
         px: 1.25,
-        py: 1,
-        minHeight: 44,
-        borderRadius: 2,
-        bgcolor: "rgba(255,255,255,0.06)",
+        py: 0.65,
+        minHeight: 34,
+        borderRadius: 1.5,
+        bgcolor: "rgba(255,255,255,0.04)",
+        border: "1px solid rgba(255,255,255,0.16)",
         color: "text.secondary",
-        transition: "background-color 140ms ease, color 140ms ease",
+        transition:
+          "background-color 140ms ease, border-color 160ms ease, color 140ms ease",
+        "& > svg": { fontSize: 15 },
         "&:hover": {
-          bgcolor: "rgba(255,255,255,0.11)",
+          bgcolor: "rgba(255,255,255,0.08)",
+          borderColor: "rgba(255,255,255,0.32)",
           color: "text.primary",
         },
       }}
     >
-      <Box
-        sx={{
-          display: "inline-flex",
-          color: "inherit",
-          "& > svg": { fontSize: 18 },
-        }}
-      >
-        {icon}
-      </Box>
+      {icon}
       <Typography
         sx={{
-          flex: 1,
-          textAlign: "left",
           fontFamily: monoFont,
-          fontSize: 13,
+          fontSize: 12.5,
           fontWeight: 500,
           letterSpacing: 0.1,
+          whiteSpace: "nowrap",
           color: "inherit",
         }}
       >

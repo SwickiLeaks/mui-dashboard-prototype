@@ -64,8 +64,8 @@ export default function ToolsPanel({ onClose }: ToolsPanelProps) {
     <>
       <ClassificationBanner
         accent={ACCENT}
-        label="TOOLS"
-        status="OPS"
+        label="Tools"
+        status="Ops"
         statusActive
       />
 

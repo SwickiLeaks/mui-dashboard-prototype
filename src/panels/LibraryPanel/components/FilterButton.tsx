@@ -14,9 +14,9 @@ type FilterButtonProps = {
 };
 
 const labelMap: Record<PlanFilter, string> = {
-  all: "ALL",
-  open: "OPEN",
-  closed: "CLOSED",
+  all: "All",
+  open: "Open",
+  closed: "Closed",
 };
 
 export default function FilterButton({
@@ -36,12 +36,12 @@ export default function FilterButton({
         onClick={onOpen}
         sx={{
           fontFamily: monoFont,
-          fontSize: 11,
-          fontWeight: 700,
-          letterSpacing: 1.3,
-          textTransform: "uppercase",
-          height: 26,
-          px: 1,
+          fontSize: 12.5,
+          fontWeight: 600,
+          letterSpacing: 0.2,
+          textTransform: "none",
+          height: 28,
+          px: 1.25,
           color: "text.secondary",
           bgcolor: "#242424",
           border: "1px solid rgba(255,255,255,0.1)",
@@ -83,9 +83,9 @@ export default function FilterButton({
             onClick={() => onChange(value)}
             sx={{
               fontFamily: monoFont,
-              fontSize: 11.5,
-              fontWeight: 700,
-              letterSpacing: 1.3,
+              fontSize: 13,
+              fontWeight: 500,
+              letterSpacing: 0.2,
               color: "text.secondary",
               "&.Mui-selected": { bgcolor: "#2a2a2a", color: "text.primary" },
               "&.Mui-selected:hover, &:hover": {

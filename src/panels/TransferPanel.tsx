@@ -28,8 +28,8 @@ export default function TransferPanel({ onClose }: TransferPanelProps) {
     <>
       <ClassificationBanner
         accent={ACCENT}
-        label="TRANSFER"
-        status="DATA MOVEMENT"
+        label="Transfer"
+        status="Data movement"
         onClose={onClose}
       />
 

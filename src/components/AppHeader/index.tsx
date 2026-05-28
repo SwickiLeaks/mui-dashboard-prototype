@@ -3,7 +3,6 @@ import { useState } from "react";
 import { AppBar, Box, Divider, Stack, Toolbar } from "@mui/material";
 
 import AppsIcon from "@mui/icons-material/Apps";
-import AssessmentIcon from "@mui/icons-material/Assessment";
 import AssignmentIcon from "@mui/icons-material/Assignment";
 import Brightness6Icon from "@mui/icons-material/Brightness6";
 import BuildIcon from "@mui/icons-material/Build";
@@ -11,6 +10,7 @@ import CloudIcon from "@mui/icons-material/Cloud";
 import FolderIcon from "@mui/icons-material/Folder";
 import LayersIcon from "@mui/icons-material/Layers";
 import PublicIcon from "@mui/icons-material/Public";
+import StraightenIcon from "@mui/icons-material/Straighten";
 
 import type { PanelKey, WeaponPlan } from "../../types";
 
@@ -172,7 +172,7 @@ export default function AppHeader({
             <CloudIcon fontSize="small" />
           </PrimaryIconButton>
           <PrimaryIconButton title="Analysis Tool">
-            <AssessmentIcon fontSize="small" />
+            <StraightenIcon fontSize="small" />
           </PrimaryIconButton>
           <PrimaryIconButton title="Map Brightness">
             <Brightness6Icon fontSize="small" />

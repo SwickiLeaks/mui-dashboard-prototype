@@ -46,8 +46,8 @@ export function ClassificationBanner({
           <Typography
             sx={{
               fontFamily: monoFont,
-              fontSize: 13,
-              letterSpacing: 0.8,
+              fontSize: 16,
+              letterSpacing: 0.4,
               fontWeight: 700,
               color: "text.primary",
               whiteSpace: "nowrap",
@@ -59,7 +59,7 @@ export function ClassificationBanner({
             <>
               <Typography
                 sx={{
-                  fontSize: 12,
+                  fontSize: 16,
                   color: "rgba(255,255,255,0.3)",
                 }}
               >
@@ -68,8 +68,8 @@ export function ClassificationBanner({
               <Typography
                 sx={{
                   fontFamily: monoFont,
-                  fontSize: 11.5,
-                  letterSpacing: 0.6,
+                  fontSize: 16,
+                  letterSpacing: 0.4,
                   fontWeight: 700,
                   color: statusActive ? "#90caf9" : "text.secondary",
                   whiteSpace: "nowrap",
