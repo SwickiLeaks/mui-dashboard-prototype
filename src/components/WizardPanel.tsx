@@ -8,6 +8,7 @@ import CreatePanel from "../panels/CreatePanel";
 import LibraryPanel from "../panels/LibraryPanel";
 import ToolsPanel from "../panels/ToolsPanel";
 import TransferPanel from "../panels/TransferPanel";
+import WorkflowPanel from "../panels/WorkflowPanel";
 
 type WizardPanelProps = {
   selectedPanel: PanelKey;
@@ -18,7 +19,6 @@ type WizardPanelProps = {
   onCloseAllPlans: () => void;
   onOpenPlans: (planIds: string[]) => void;
   onOpenLibrary: () => void;
-  onOpenAssociation: (planId: string) => void;
   onDisassociate: (fromPlanId: string, refId: string) => void;
   onClose: () => void;
 };
@@ -32,7 +32,6 @@ export default function WizardPanel({
   onCloseAllPlans,
   onOpenPlans,
   onOpenLibrary,
-  onOpenAssociation,
   onDisassociate,
   onClose,
 }: WizardPanelProps) {
@@ -78,7 +77,6 @@ export default function WizardPanel({
             onClosePlan={onClosePlan}
             onCloseAllPlans={onCloseAllPlans}
             onOpenLibrary={onOpenLibrary}
-            onOpenAssociation={onOpenAssociation}
             onDisassociate={onDisassociate}
           />
         )}
@@ -88,6 +86,7 @@ export default function WizardPanel({
         )}
         {selectedPanel === "tools" && <ToolsPanel onClose={onClose} />}
         {selectedPanel === "transfer" && <TransferPanel onClose={onClose} />}
+        {selectedPanel === "workflow" && <WorkflowPanel onClose={onClose} />}
       </Box>
     </Box>
   );

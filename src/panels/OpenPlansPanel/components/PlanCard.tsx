@@ -26,20 +26,22 @@ const noop = () => {};
 type PlanCardProps = {
   plan: WeaponPlan;
   selected: boolean;
+  selectedPlanId: string | null;
   associatedPlans: WeaponPlan[];
   onSelect: () => void;
   onClose: () => void;
-  onOpenAssociation: (id: string) => void;
+  onSelectAssociation: (plan: WeaponPlan) => void;
   onDisassociate: (fromId: string, refId: string) => void;
 };
 
 export default function PlanCard({
   plan,
   selected,
+  selectedPlanId,
   associatedPlans,
   onSelect,
   onClose,
-  onOpenAssociation,
+  onSelectAssociation,
   onDisassociate,
 }: PlanCardProps) {
   const [associationsExpanded, setAssociationsExpanded] = useState(false);
@@ -89,7 +91,7 @@ export default function PlanCard({
             >
               {plan.name}
             </Typography>
-            {selected && (
+            {selectedPlanId === plan.id && (
               <Box
                 sx={{
                   px: 1,
@@ -226,9 +228,9 @@ export default function PlanCard({
                           <AssociationRow
                             key={associated.id}
                             name={associated.name}
-                            isOpen={associated.isOpen}
                             accent={categoryColor[associated.category]}
-                            onOpen={() => onOpenAssociation(associated.id)}
+                            selected={selectedPlanId === associated.id}
+                            onSelect={() => onSelectAssociation(associated)}
                             onDisassociate={() =>
                               onDisassociate(plan.id, associated.id)
                             }

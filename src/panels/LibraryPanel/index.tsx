@@ -68,6 +68,8 @@ export default function LibraryPanel({
       network: scope.filter((p) => p.category === "network").length,
       comm: scope.filter((p) => p.category === "comm").length,
       e2: scope.filter((p) => p.category === "e2").length,
+      shapeCollection: scope.filter((p) => p.category === "shapeCollection")
+        .length,
     } satisfies Record<PlanCategory, number>;
   }, [plans, path]);
 

@@ -64,7 +64,11 @@ export default function AppHeader({
 }: AppHeaderProps) {
   const folderActive = expandedControls;
   const toolsActive = selectedPanel === "tools";
-  const anyActive = folderActive || toolsActive;
+  const workflowActive = selectedPanel === "workflow";
+
+  // Only the folder collapses the icon row to reveal the expanded control
+  // bar. Every other top-level icon just highlights in place when selected.
+  const collapsed = folderActive;
 
   const [appMenuAnchor, setAppMenuAnchor] = useState<HTMLElement | null>(null);
   const appMenuOpen = Boolean(appMenuAnchor);
@@ -87,13 +91,9 @@ export default function AppHeader({
     }
   };
 
-  const handleToolsClick = () => {
-    if (toolsActive) {
-      onSelectedPanelChange(null);
-    } else {
-      onExpandedControlsChange(false);
-      onSelectedPanelChange("tools");
-    }
+  const togglePanel = (key: PanelKey) => () => {
+    onExpandedControlsChange(false);
+    onSelectedPanelChange((current) => (current === key ? null : key));
   };
 
   return (
@@ -116,35 +116,35 @@ export default function AppHeader({
             sx={{ mx: 1, my: 1, borderColor: "#2a2a2a" }}
           />
           <Box sx={{ display: "flex", alignItems: "center" }}>
-            <IconSlot visible={!anyActive} collapseGap={anyActive}>
+            <IconSlot visible={!collapsed} collapseGap={collapsed}>
               <PrimaryIconButton>
                 <PublicIcon fontSize="small" />
               </PrimaryIconButton>
             </IconSlot>
-            <IconSlot
-              visible={!anyActive || folderActive}
-              collapseGap={anyActive}
-            >
+            <IconSlot visible collapseGap={collapsed}>
               <PrimaryIconButton
+                title="Browse"
                 active={folderActive}
                 onClick={handleFolderClick}
               >
                 <FolderIcon fontSize="small" />
               </PrimaryIconButton>
             </IconSlot>
-            <IconSlot
-              visible={!anyActive || toolsActive}
-              collapseGap={anyActive}
-            >
+            <IconSlot visible={!collapsed} collapseGap={collapsed}>
               <PrimaryIconButton
+                title="Tools"
                 active={toolsActive}
-                onClick={handleToolsClick}
+                onClick={togglePanel("tools")}
               >
                 <BuildIcon fontSize="small" />
               </PrimaryIconButton>
             </IconSlot>
-            <IconSlot visible={!anyActive} collapseGap={anyActive}>
-              <PrimaryIconButton>
+            <IconSlot visible={!collapsed} collapseGap={collapsed}>
+              <PrimaryIconButton
+                title="Workflow"
+                active={workflowActive}
+                onClick={togglePanel("workflow")}
+              >
                 <AssignmentIcon fontSize="small" />
               </PrimaryIconButton>
             </IconSlot>

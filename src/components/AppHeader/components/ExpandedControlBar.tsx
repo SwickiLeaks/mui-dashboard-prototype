@@ -46,7 +46,7 @@ export default function ExpandedControlBar({
               }
               sx={{
                 height: 38,
-                borderRadius: 0.5,
+                borderRadius: 2,
                 px: 1.25,
                 textTransform: "none",
                 whiteSpace: "nowrap",

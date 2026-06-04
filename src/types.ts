@@ -1,6 +1,17 @@
-export type PanelKey = "map" | "create" | "library" | "tools" | "transfer";
+export type PanelKey =
+  | "map"
+  | "create"
+  | "library"
+  | "tools"
+  | "transfer"
+  | "workflow";
 
-export type PlanCategory = "weapon" | "network" | "comm" | "e2";
+export type PlanCategory =
+  | "weapon"
+  | "network"
+  | "comm"
+  | "e2"
+  | "shapeCollection";
 
 export type LibraryBucket = "standards" | "myItems" | "favorites" | "aircrew";
 

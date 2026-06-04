@@ -11,4 +11,5 @@ export const categoryColor: Record<PlanCategory, string> = {
   network: appAccent,
   comm: appAccent,
   e2: appAccent,
+  shapeCollection: appAccent,
 };

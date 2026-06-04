@@ -1,5 +1,6 @@
 import AccountTreeIcon from "@mui/icons-material/AccountTree";
 import BoltIcon from "@mui/icons-material/Bolt";
+import CategoryIcon from "@mui/icons-material/Category";
 import GroupsIcon from "@mui/icons-material/Groups";
 import PersonIcon from "@mui/icons-material/Person";
 import RouterIcon from "@mui/icons-material/Router";
@@ -62,5 +63,11 @@ export const categories: CategoryMeta[] = [
     label: "E2 Link 16 Event Library",
     description: "E-2 Link 16 Events Library",
     icon: <BoltIcon />,
+  },
+  {
+    key: "shapeCollection",
+    label: "Shape Collections Library",
+    description: "Catalog of Shape Collections",
+    icon: <CategoryIcon />,
   },
 ];

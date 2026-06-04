@@ -26,7 +26,7 @@ export default function PrimaryIconButton({
         height: 38,
         padding: 0,
         boxSizing: "border-box",
-        borderRadius: 0.5,
+        borderRadius: 2,
         bgcolor: active ? "#2a2a2a" : "#1a1a1a",
         border: "1px solid",
         borderColor: active ? selectionStyles.border : "#2a2a2a",

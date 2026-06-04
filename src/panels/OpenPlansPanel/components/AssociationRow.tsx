@@ -1,29 +1,29 @@
-import { Box, Button, Stack, Typography } from "@mui/material";
+import { Box, Button, Typography } from "@mui/material";
 
 import ArticleIcon from "@mui/icons-material/Article";
-import LaunchIcon from "@mui/icons-material/Launch";
 import LinkOffIcon from "@mui/icons-material/LinkOff";
 
 import { monoFont } from "../../../theme";
-import { dangerMicroActionSx, microActionSx } from "../styles";
+import { dangerMicroActionSx } from "../styles";
 
 type AssociationRowProps = {
   name: string;
-  isOpen: boolean;
   accent: string;
-  onOpen: () => void;
+  selected: boolean;
+  onSelect: () => void;
   onDisassociate: () => void;
 };
 
 export default function AssociationRow({
   name,
-  isOpen,
   accent,
-  onOpen,
+  selected,
+  onSelect,
   onDisassociate,
 }: AssociationRowProps) {
   return (
     <Box
+      onClick={onSelect}
       sx={{
         display: "flex",
         alignItems: "center",
@@ -31,10 +31,16 @@ export default function AssociationRow({
         py: 1,
         px: 1.25,
         borderRadius: 2,
-        bgcolor: "rgba(255,255,255,0.05)",
-        transition: "background-color 140ms ease",
+        cursor: "pointer",
+        bgcolor: selected ? "rgba(144,202,249,0.16)" : "rgba(255,255,255,0.05)",
+        border: `1px solid ${
+          selected ? "rgba(144,202,249,0.6)" : "transparent"
+        }`,
+        transition: "background-color 140ms ease, border-color 140ms ease",
         "&:hover": {
-          bgcolor: "rgba(255,255,255,0.09)",
+          bgcolor: selected
+            ? "rgba(144,202,249,0.2)"
+            : "rgba(255,255,255,0.09)",
         },
       }}
     >
@@ -52,48 +58,41 @@ export default function AssociationRow({
       >
         <ArticleIcon sx={{ fontSize: 14 }} />
       </Box>
-      <Stack
-        direction="row"
-        alignItems="baseline"
-        spacing={0.75}
-        sx={{ minWidth: 0, flex: 1 }}
+      <Typography
+        sx={{ fontSize: 13, fontWeight: 600, minWidth: 0, flex: 1 }}
+        noWrap
       >
-        <Typography sx={{ fontSize: 13, fontWeight: 600 }} noWrap>
-          {name}
-        </Typography>
-        {isOpen && (
-          <Typography
-            sx={{
-              fontFamily: monoFont,
-              fontSize: 11.5,
-              fontWeight: 700,
-              letterSpacing: 0.2,
-              color: "#90caf9",
-              flexShrink: 0,
-            }}
-          >
-            Open
-          </Typography>
-        )}
-      </Stack>
-      <Stack direction="row" spacing={0.5} sx={{ flexShrink: 0 }}>
-        <Button
-          size="small"
-          startIcon={<LaunchIcon sx={{ fontSize: 12 }} />}
-          onClick={onOpen}
-          sx={microActionSx}
+        {name}
+      </Typography>
+      {selected && (
+        <Box
+          sx={{
+            px: 0.85,
+            py: 0.25,
+            borderRadius: "999px",
+            fontFamily: monoFont,
+            fontSize: 10.5,
+            fontWeight: 600,
+            letterSpacing: 0.1,
+            color: "#90caf9",
+            bgcolor: "rgba(144,202,249,0.16)",
+            flexShrink: 0,
+          }}
         >
-          Open
-        </Button>
-        <Button
-          size="small"
-          startIcon={<LinkOffIcon sx={{ fontSize: 12 }} />}
-          onClick={onDisassociate}
-          sx={dangerMicroActionSx}
-        >
-          Disassociate
-        </Button>
-      </Stack>
+          Active
+        </Box>
+      )}
+      <Button
+        size="small"
+        startIcon={<LinkOffIcon sx={{ fontSize: 12 }} />}
+        onClick={(event) => {
+          event.stopPropagation();
+          onDisassociate();
+        }}
+        sx={dangerMicroActionSx}
+      >
+        Disassociate
+      </Button>
     </Box>
   );
 }

@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { Box, Button, Stack } from "@mui/material";
 
 import CloseIcon from "@mui/icons-material/Close";
@@ -16,7 +17,6 @@ type OpenPlansPanelProps = {
   onClosePlan: (planId: string) => void;
   onCloseAllPlans: () => void;
   onOpenLibrary: () => void;
-  onOpenAssociation: (planId: string) => void;
   onDisassociate: (fromPlanId: string, refId: string) => void;
 };
 
@@ -27,12 +27,23 @@ export default function OpenPlansPanel({
   onClosePlan,
   onCloseAllPlans,
   onOpenLibrary,
-  onOpenAssociation,
   onDisassociate,
 }: OpenPlansPanelProps) {
   const openPlans = plans.filter((plan) => plan.isOpen);
   const isEmpty = openPlans.length === 0;
   const planById = new Map(plans.map((p) => [p.id, p]));
+
+  // Which card is expanded in the panel. Tracked independently of the
+  // workspace-selected plan so drilling into an associated plan row keeps the
+  // parent card open while the association becomes the selected plan.
+  const [expandedPlanId, setExpandedPlanId] = useState<string | null>(
+    selectedPlan?.id ?? null
+  );
+
+  const handleSelectCard = (plan: WeaponPlan) => {
+    setExpandedPlanId(plan.id);
+    onSelectPlan(plan);
+  };
 
   return (
     <>
@@ -69,7 +80,6 @@ export default function OpenPlansPanel({
         >
           <Stack spacing={2}>
             {openPlans.map((plan) => {
-              const isSelected = selectedPlan?.id === plan.id;
               const associatedPlans = plan.associatedPlanIds
                 .map((id) => planById.get(id))
                 .filter((p): p is WeaponPlan => Boolean(p));
@@ -78,11 +88,12 @@ export default function OpenPlansPanel({
                 <PlanCard
                   key={plan.id}
                   plan={plan}
-                  selected={isSelected}
+                  selected={expandedPlanId === plan.id}
+                  selectedPlanId={selectedPlan?.id ?? null}
                   associatedPlans={associatedPlans}
-                  onSelect={() => onSelectPlan(plan)}
+                  onSelect={() => handleSelectCard(plan)}
                   onClose={() => onClosePlan(plan.id)}
-                  onOpenAssociation={onOpenAssociation}
+                  onSelectAssociation={onSelectPlan}
                   onDisassociate={onDisassociate}
                 />
               );

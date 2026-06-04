@@ -38,6 +38,7 @@ export default function App() {
         F3: "library",
         F4: "tools",
         F5: "transfer",
+        F6: "workflow",
       };
 
       const panel = hotkeys[event.key];
@@ -105,19 +106,6 @@ export default function App() {
     setSelectedPlan((current) =>
       current?.id === updatedPlan.id ? updatedPlan : current
     );
-  };
-
-  const handleOpenAssociation = (planId: string) => {
-    setPlans((currentPlans) =>
-      currentPlans.map((plan) =>
-        plan.id === planId ? { ...plan, isOpen: true } : plan
-      )
-    );
-
-    const target = plans.find((plan) => plan.id === planId);
-    if (target) {
-      setSelectedPlan({ ...target, isOpen: true });
-    }
   };
 
   const handleDisassociate = (fromPlanId: string, refId: string) => {
@@ -213,7 +201,6 @@ export default function App() {
                   onCloseAllPlans={handleCloseAllPlans}
                   onOpenPlans={handleOpenPlans}
                   onOpenLibrary={handleOpenLibrary}
-                  onOpenAssociation={handleOpenAssociation}
                   onDisassociate={handleDisassociate}
                   onClose={closePanel}
                 />
