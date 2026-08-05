@@ -130,3 +130,79 @@ single token file.
 Rule of thumb: reusable across *any* app → atom/molecule (belongs in the design
 system). Only makes sense in *this* app → organism/pattern (lives in the app, or
 a separate app-patterns layer that consumes the design system).
+
+---
+
+## What is this, technically? (MUI + tokens + `sx`)
+
+A common question: "is this MUI overrides plus custom CSS?" Close, but there are
+really **three** mechanisms, and "custom CSS" isn't quite the right label:
+
+1. **MUI components as the base.** Every component wraps a MUI primitive —
+   `Button` wraps MUI's `Button`, `Card`/`Pill`/`IconChip` wrap `Box`, `Text`
+   wraps `Typography`. We don't reimplement behavior, just re-skin and constrain
+   the API.
+2. **A small amount of MUI theme-level overrides.** `createSystemTheme.ts`
+   configures the MUI theme: palette, typography (incl. our custom `Text`
+   variants), and a handful of `components.styleOverrides` (e.g. `MuiButton` →
+   `textTransform: none`, `MuiPaper` → `backgroundImage: none`, `MuiCssBaseline`
+   → page background). This is the actual "MUI overrides" part, kept thin.
+3. **Per-component styling via the `sx` prop — not hand-written CSS.** The bulk
+   of the look lives in each component's `sx` blocks, which read the semantic
+   tokens. `sx` is **CSS-in-JS**: MUI compiles it through **Emotion** into real
+   CSS at runtime. There are **no `.css` files, no CSS modules, no Tailwind, no
+   authored global stylesheet** — the only global CSS is MUI's `CssBaseline`
+   reset.
+
+Most precise framing:
+
+> Custom React components wrapping MUI primitives, styled with MUI's `sx` prop
+> (Emotion CSS-in-JS) that reads design tokens — on top of a lightweight MUI
+> theme override.
+
+And one piece that isn't CSS at all: the **tokens themselves** are plain
+TypeScript objects (values like `"#2d2d2d"` and `accentAlpha(0.16)`), not CSS
+variables. That's what makes a theme swap a pure data change rather than a
+stylesheet change. (This same approach *could* emit CSS custom properties via
+MUI's CSS-variables mode — but as built, it's CSS-in-JS via `sx`.)
+
+---
+
+## How developers use it: pre-applied tokens + the `sx` escape hatch
+
+The shipped components come with **tokens already applied**. A developer writes
+`<Tile title="…" active selected />` and gets the correct surfaces, borders,
+elevation, and states with zero styling knowledge — the tokens are baked into the
+component's base `sx`; the consumer never touches them directly.
+
+- **Props are the first-class way to vary a component.** Before reaching for
+  `sx`, the intended dials are the component's own props — `variant`, `tone`,
+  `size`, `active`, `selected`. Those are the supported variations, and they stay
+  on-token.
+- **`sx` is the escape hatch for one-offs.** Every component takes an `sx` prop
+  and merges it **after** its base styles, so the consumer's `sx` wins on any
+  conflict:
+
+  ```tsx
+  sx={[
+    (theme) => ({ /* base styles from tokens */ }),
+    ...(Array.isArray(sx) ? sx : sx ? [sx] : []), // consumer sx appended last → higher precedence
+  ]}
+  ```
+
+  So a developer can nudge placement for a specific spot
+  (`<Button sx={{ mt: 2, width: "100%" }} />`) without forking the component.
+
+Two guardrails worth stating:
+
+- **It's a nudge, not a redesign.** If someone re-styles a component's core
+  appearance through `sx` repeatedly, that's the signal it should become a new
+  prop/variant or a new component — not a per-use override. Keeping restyling out
+  of `sx` is what preserves consistency.
+- **Even in `sx`, reach for tokens, not hex.** A one-off can stay on-system by
+  pulling from the theme — `sx={{ color: (theme) => theme.system.accent.main }}`
+  — so overrides don't reintroduce hardcoded values.
+
+In one line: **props for supported variation, `sx` for last-mile
+layout/placement tweaks, and the component's tokenized base does everything else
+by default.**
