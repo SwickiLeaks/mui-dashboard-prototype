@@ -97,6 +97,63 @@ app.
 
 ---
 
+## Layout & Grid — the frame components live in
+
+A parallel concern to the component ladder. The core principle: **components
+carry no layout logic** — no fixed page widths, no column math baked in. They're
+*placed into* a layout by app screens. That keeps layout a separate, swappable
+data model, just like color and type.
+
+**The responsive model (simple to start, room to grow):**
+
+| Token | Mobile (<600) | Tablet (600–1199) | Desktop (≥1200) |
+| --- | --- | --- | --- |
+| Columns | 12 | 12 | 12 |
+| Gutter | 16px | 24px | 24px |
+| Outer margin | 16px | 24px | 32px |
+| Max content width | — | — | 1440px (centered) |
+
+Breakpoints are MUI's defaults (xs/sm/md/lg/xl), so responsive props work without
+any theme override. Starting with **12 columns at every breakpoint** is the
+simplest mental model — items just change their *span* per size.
+
+**Two primitives (both shipped from the package):**
+
+- `Container` — the page frame: centers content, caps it at the max width,
+  applies the responsive outer margins.
+- `Grid` / `GridItem` — the 12-column system, with the token gutters baked in. A
+  thin wrapper over MUI's Grid so we're not reinventing flex/grid math.
+
+**How it's used** — screens nest components inside the frame:
+
+```tsx
+<Container>
+  <Grid>
+    <GridItem span={{ xs: 12, md: 6 }}>
+      <Tile title="Plan A" />
+    </GridItem>
+    <GridItem span={{ xs: 12, md: 6 }}>
+      <Tile title="Plan B" />
+    </GridItem>
+  </Grid>
+</Container>
+```
+
+`span={{ xs: 12, md: 6, lg: 4 }}` reads as full-width on mobile → half on tablet →
+a third on desktop. A `GridItem` can hold its own `Grid`, so layouts nest.
+
+**How it progresses:** start with `Container` + a 12-col `Grid` (documented in the
+**Foundations / Layout** story). Then grow into a 4/8/12 column *progression*,
+density presets, and a named **app-shell layout** (header / panel / content /
+drawer regions like the real app).
+
+**Talking point:** "components are placed into the grid, they don't contain it."
+That separation is why the same `Tile` works in a panel, a dashboard, or a
+full-page list without change — the screen decides the columns, the component
+just fills its cell.
+
+---
+
 ## The vehicle — Storybook + Foundations
 
 - **Storybook** is the living catalog: every component has a story with
